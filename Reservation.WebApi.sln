@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservation.Core", "Reserva
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservation.Infrastructure", "Reservation.Infrastructure\Reservation.Infrastructure.csproj", "{97CB76A7-7D46-4FC0-9FF7-11489C7C7385}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservation.Application", "Reservation.Application\Reservation.Application.csproj", "{5F424C20-C75C-4D07-881A-9A5848129600}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{97CB76A7-7D46-4FC0-9FF7-11489C7C7385}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97CB76A7-7D46-4FC0-9FF7-11489C7C7385}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97CB76A7-7D46-4FC0-9FF7-11489C7C7385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F424C20-C75C-4D07-881A-9A5848129600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F424C20-C75C-4D07-881A-9A5848129600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F424C20-C75C-4D07-881A-9A5848129600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F424C20-C75C-4D07-881A-9A5848129600}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
