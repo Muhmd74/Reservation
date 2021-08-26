@@ -32,7 +32,7 @@ namespace Reservation.WebApi.Controllers
 
         [HttpGet(Routers.Router.Reservation.GetReservationById)]
 
-        public async Task<IActionResult> GetReservationById(Guid id)
+        public async Task<IActionResult> GetReservationById([FromQuery] Guid id)
         {
             var query = new GetReservationByIdQuery(id);
             var result = await _mediator.Send(query);

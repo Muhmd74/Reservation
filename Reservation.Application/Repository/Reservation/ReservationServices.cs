@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
- using Reservation.Application.Repository.Reservation.Dtos.Responses;
+using Reservation.Application.Repository.Reservation.Dtos.Request;
+using Reservation.Application.Repository.Reservation.Dtos.Responses;
 using Reservation.Infrastructure.Data.ApplicationDbContext;
 
 namespace Reservation.Application.Repository.Reservation
@@ -20,11 +22,18 @@ namespace Reservation.Application.Repository.Reservation
             _mapperManager = mapperManager;
         }
 
+        public Task<CreateReservationRequest> CreateReservation(CreateReservationRequest model)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task< List<ReservationResponses>> GetAllReservation()
         {
             try
             {
-                var model = await _context.Trips.ToListAsync();
+                var model = await _context.Trips
+                    .OrderByDescending(d=>d.DateTime)
+                    .ToListAsync();
 
                 var result= _mapperManager.Map<List<ReservationResponses>>(model);
                 return result;
