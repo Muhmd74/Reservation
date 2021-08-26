@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Reservation.Application.Handler
+namespace Reservation.Core.Interface
 {
-   public class GetAllReservation 
+    public interface IMapInjectable
     {
+
     }
 }

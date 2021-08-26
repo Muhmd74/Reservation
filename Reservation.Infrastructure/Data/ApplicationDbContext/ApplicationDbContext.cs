@@ -20,6 +20,7 @@ namespace Reservation.Infrastructure.Data.ApplicationDbContext
         public DbSet<User> Users { get; set; }
         //Trips
         public DbSet<Trip> Trips { get; set; }
+        public DbSet<TripUser> TripUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
