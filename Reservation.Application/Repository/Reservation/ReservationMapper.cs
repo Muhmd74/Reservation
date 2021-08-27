@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using AutoMapper;
+using Reservation.Application.Commands;
 using Reservation.Application.Repository.Reservation.Dtos.Request;
 using Reservation.Application.Repository.Reservation.Dtos.Responses;
 using Reservation.Core.Entities;
@@ -15,6 +16,15 @@ namespace Reservation.Application.Repository.Reservation
         public ReservationMapper()
         {
             //create
+            CreateMap<Trip, CreateReservationCommand>()
+                .ForMember(d => d.DateTime,
+                    s => s.MapFrom(a => a.DateTime == DateTime.Now))
+                .ForMember(d => d.Price, s => s.MapFrom(a => a.Price == 0))
+                .ForMember(d => d.Content,
+                    s =>
+                        s.MapFrom(a => HttpUtility.HtmlEncode(a.Content))
+                ).ReverseMap();
+
             CreateMap<Trip, CreateReservationRequest>()
                 .ForMember(d => d.DateTime,
                     s => s.MapFrom(a => a.DateTime == DateTime.Now))

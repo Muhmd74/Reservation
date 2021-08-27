@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Reservation.Application.Commands;
 using Reservation.Application.Common.Response;
 using Reservation.Application.Repository.Reservation.Dtos.Request;
 using Reservation.Application.Repository.Reservation.Dtos.Responses;
@@ -13,7 +14,7 @@ using Reservation.Infrastructure.Data.ApplicationDbContext;
 
 namespace Reservation.Application.Repository.Reservation
 {
-    public class ReservationServices : IReservation ,IDisposable
+    public class ReservationServices : IReservation, IDisposable
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapperManager;
@@ -24,24 +25,33 @@ namespace Reservation.Application.Repository.Reservation
             _mapperManager = mapperManager;
         }
 
-        public async Task<CreateReservationRequest> CreateReservation(CreateReservationRequest model)
+        public async Task<OutputResponse<ReservationResponses>> CreateReservation(CreateReservationCommand model)
         {
             try
             {
                 var trip = _mapperManager.Map<Trip>(model);
                 var result = await _context.Trips.AddAsync(trip);
                 await _context.SaveChangesAsync();
-                return _mapperManager.Map<CreateReservationRequest>(result.Entity);
+                return new OutputResponse<ReservationResponses>()
+                {
+                    Model = _mapperManager.Map<ReservationResponses>(result.Entity),
+                    Message = ResponseMessages.Success,
+                    Success = true
+                };
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                return new OutputResponse<ReservationResponses>()
+                {
+                    Model = null,
+                    Message = e.Message,
+                    Success = true
+                };
             }
 
         }
 
-        public async Task<OutputResponse<List<ReservationResponses>>> GetAllReservation(int pageSize=Int32.MaxValue)
+        public async Task<OutputResponse<List<ReservationResponses>>> GetAllReservation(int pageSize = Int32.MaxValue)
         {
 
             var model = await _context.Trips
@@ -62,7 +72,7 @@ namespace Reservation.Application.Repository.Reservation
         public async Task<OutputResponse<ReservationResponses>> GetByReservationId(Guid id)
         {
             var model = await _context.Trips.FirstOrDefaultAsync(d => d.Id == id);
-            if (model!=null)
+            if (model != null)
             {
                 return new OutputResponse<ReservationResponses>()
                 {
