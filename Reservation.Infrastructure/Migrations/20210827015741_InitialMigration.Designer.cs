@@ -10,8 +10,8 @@ using Reservation.Infrastructure.Data.ApplicationDbContext;
 namespace Reservation.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210826032749_CreateTripUser")]
-    partial class CreateTripUser
+    [Migration("20210827015741_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,7 +58,7 @@ namespace Reservation.Infrastructure.Migrations
                             Id = new Guid("4cd181b7-3e7a-4691-a8fa-3eba2a8a3f72"),
                             CityName = "Cairo",
                             Content = "Start and end in Cairo! With the In-depth Cultural tour King Ramses with Cruise - 13 days, you have a 13 days tour package taking you through Cairo, Egypt and 8 other destinations in Egypt. King Ramses with Cruise - 13 days includes accommodation in a hotel as well as an expert guide, meals, transport and more",
-                            DateTime = new DateTime(2021, 8, 26, 5, 27, 45, 182, DateTimeKind.Local).AddTicks(8381),
+                            DateTime = new DateTime(2021, 8, 27, 3, 57, 38, 563, DateTimeKind.Local).AddTicks(7662),
                             ImageUrl = "",
                             Price = 456m,
                             Title = "King Ramses with Cruise - 13 days"
@@ -84,18 +84,18 @@ namespace Reservation.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TripUser");
+                    b.ToTable("TripUsers");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("af1fd978-e084-4152-8880-87d3787e6c7e"),
+                            Id = new Guid("657180c2-6268-4a7c-a296-959333bd1aa3"),
                             TripId = new Guid("4cd181b7-3e7a-4691-a8fa-3eba2a8a3f72"),
                             UserId = new Guid("e245d563-07b6-46c7-8a36-346e11144376")
                         },
                         new
                         {
-                            Id = new Guid("59ee1642-34be-45ec-a4ac-616143ae703c"),
+                            Id = new Guid("7d51f502-875e-44b7-b6bd-2999b7db1f30"),
                             TripId = new Guid("4cd181b7-3e7a-4691-a8fa-3eba2a8a3f72"),
                             UserId = new Guid("7d0f809a-7e7d-4d62-8923-85011cdc7046")
                         });

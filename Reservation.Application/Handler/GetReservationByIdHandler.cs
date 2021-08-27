@@ -4,13 +4,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Reservation.Application.Common.Response;
 using Reservation.Application.Query;
 using Reservation.Application.Repository.Reservation;
 using Reservation.Application.Repository.Reservation.Dtos.Responses;
 
 namespace Reservation.Application.Handler
 {
-    public class GetReservationByIdHandler : IRequestHandler<GetReservationByIdQuery, ReservationResponses>
+    public class GetReservationByIdHandler : IRequestHandler<GetReservationByIdQuery, OutputResponse<ReservationResponses>>
     {
         private readonly IReservation _reservation;
 
@@ -19,7 +20,7 @@ namespace Reservation.Application.Handler
             _reservation = reservation;
         }
 
-        public Task<ReservationResponses> Handle(GetReservationByIdQuery request, CancellationToken cancellationToken)
+        public Task<OutputResponse<ReservationResponses>> Handle(GetReservationByIdQuery request, CancellationToken cancellationToken)
         {
             var model = _reservation.GetByReservationId(request.Id);
             return model;

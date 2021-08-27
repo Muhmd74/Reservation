@@ -9,6 +9,6 @@ namespace Reservation.Application.Repository.Reservation.Dtos.Request
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
         public string CityName { get; set; }
-        public DateTime DateTime { get; set; } =DateTime.Now;
+        public DateTime DateTime { get; set; }  
     }
 }

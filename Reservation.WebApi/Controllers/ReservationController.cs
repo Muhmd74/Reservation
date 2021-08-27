@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Reservation.Application.Handler;
 using Reservation.Application.Query;
+using Reservation.Application.Repository.Reservation.Dtos.Request;
 
 namespace Reservation.WebApi.Controllers
 {
@@ -20,7 +21,14 @@ namespace Reservation.WebApi.Controllers
             _mediator = mediator;
         }
 
+        [HttpPost(Routers.Router.Reservation.CreateNewReservation)]
 
+        public async Task<IActionResult> CreateNewReservation([FromBody] CreateReservationRequest model)
+        {
+            var query = new GetAllReservationsQuery();
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
         [HttpGet(Routers.Router.Reservation.GetAllReservation)]
 
         public async Task<IActionResult> GetAllReservation()
