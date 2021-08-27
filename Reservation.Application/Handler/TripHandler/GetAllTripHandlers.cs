@@ -21,7 +21,7 @@ namespace Reservation.Application.Handler.TripHandler
 
         public async Task<OutputResponse<List<TripResponses>>> Handle(GetAllTripQuery request, CancellationToken cancellationToken)
         {
-            var result = await _trip.GetAllTrip(request.PageSize);
+            var result = await _trip.GetAllTrip(request.PageSize,request.PageNumber);
             return result;
         }
     }

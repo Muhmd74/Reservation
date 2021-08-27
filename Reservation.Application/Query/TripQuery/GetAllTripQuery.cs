@@ -8,10 +8,11 @@ namespace Reservation.Application.Query.TripQuery
     public class GetAllTripQuery : IRequest<OutputResponse<List<TripResponses>>>
     {
         public int PageSize { get; }
-
-        public GetAllTripQuery(int pageSize)
+        public int PageNumber { get;   }
+        public GetAllTripQuery(int pageSize,int pageNumber)
         {
             PageSize = pageSize;
+            PageNumber = pageNumber;
         }
 
 

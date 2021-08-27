@@ -34,7 +34,7 @@ namespace Reservation.WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost(Routers.Router.TripUserReservation.Delete)]
+        [HttpPut(Routers.Router.TripUserReservation.Delete)]
         public async Task<IActionResult> Create([FromBody] DeleteTripUserCommand command)
         {
             var result = await _mediator.Send(command);

@@ -10,8 +10,8 @@ namespace Reservation.Application.Repository.Trip
     public interface ITrip
     {
         Task<OutputResponse<TripResponses>> CreateTrip(CreateTripCommand model);
-        Task<OutputResponse<List<TripResponses>>> GetAllTrip(int pageSize=Int32.MaxValue);
-        Task<OutputResponse<List<TripResponses>>> GetAllTripDeleted(int pageSize = Int32.MaxValue);
+        Task<OutputResponse<List<TripResponses>>> GetAllTrip(int pageSize=Int32.MaxValue, int pageNumber = Int32.MaxValue);
+        Task<OutputResponse<List<TripResponses>>> GetAllTripDeleted(int pageSize = Int32.MaxValue, int pageNumber = Int32.MaxValue);
 
         Task<OutputResponse<TripResponses>> GetByTripId(Guid id);
         Task<OutputResponse<TripResponses>> UpdateTrip(UpdateTripCommand model);

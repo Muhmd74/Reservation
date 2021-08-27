@@ -31,7 +31,7 @@ namespace Reservation.WebApi.Controllers
             return BadRequest(result);
         }
         [HttpGet(Routers.Router.User.GetAllUser)]
-        public async Task<IActionResult> GetAllUser(int pageSize=Int32.MaxValue)
+        public async Task<IActionResult> GetAllUser([FromQuery]int pageSize=Int32.MaxValue)
         {
             var query = new GetAllUserQuery(pageSize);
             var result = await _mediator.Send(query);

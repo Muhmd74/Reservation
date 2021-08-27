@@ -56,13 +56,14 @@ namespace Reservation.Application.Repository.Trip
 
         }
 
-        public async Task<OutputResponse<List<TripResponses>>> GetAllTrip(int pageSize = Int32.MaxValue)
+        public async Task<OutputResponse<List<TripResponses>>> GetAllTrip(int pageSize = Int32.MaxValue,int pageNumber=Int32.MaxValue)
         {
+            var start = pageNumber * pageSize - pageSize;
 
             var model = await _context.Trips
                 .OrderByDescending(d => d.DateTime)
                 .Where(d => d.IsDeleted == false)
-                .Take(pageSize)
+                .Skip(start).Take(pageSize)
                 .ToListAsync();
 
             return new OutputResponse<List<TripResponses>>()
@@ -75,13 +76,14 @@ namespace Reservation.Application.Repository.Trip
 
         }
 
-        public async Task<OutputResponse<List<TripResponses>>> GetAllTripDeleted(int pageSize = Int32.MaxValue)
+        public async Task<OutputResponse<List<TripResponses>>> GetAllTripDeleted(int pageSize = Int32.MaxValue,int pageNumber=Int32.MaxValue)
         {
+            var start = pageNumber * pageSize - pageSize;
 
             var model = await _context.Trips
                 .OrderByDescending(d => d.DateTime)
                 .Where(d => d.IsDeleted)
-                .Take(pageSize)
+                .Skip(start).Take(pageSize)
                 .ToListAsync();
 
             return new OutputResponse<List<TripResponses>>()

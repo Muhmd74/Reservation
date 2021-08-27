@@ -22,7 +22,7 @@ namespace Reservation.Application.Handler.TripHandler
 
         public async Task<OutputResponse<List<TripResponses>>> Handle(GetAllTripDeletedQuery request, CancellationToken cancellationToken)
         {
-            var result = await _trip.GetAllTripDeleted(request.PageSize);
+            var result = await _trip.GetAllTripDeleted(request.PageSize,request.PageNumber);
             return result;
         }
 

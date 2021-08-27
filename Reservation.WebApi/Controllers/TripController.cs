@@ -54,9 +54,9 @@ namespace Reservation.WebApi.Controllers
 
         [HttpGet(Routers.Router.Trip.GetAllTrip)]
 
-        public async Task<IActionResult> GetAllTrip(int pageSize = Int32.MaxValue)
+        public async Task<IActionResult> GetAllTrip([FromQuery]int pageSize = Int32.MaxValue,int pageNumber=Int32.MaxValue)
         {
-            var query = new GetAllTripQuery(pageSize);
+            var query = new GetAllTripQuery(pageSize,pageNumber);
             var result = await _mediator.Send(query);
             if (result.Success)
             {
@@ -68,9 +68,9 @@ namespace Reservation.WebApi.Controllers
 
         [HttpGet(Routers.Router.Trip.GetAllTripDeleted)]
 
-        public async Task<IActionResult> GetAllTripDeleted(int pageSize = Int32.MaxValue)
+        public async Task<IActionResult> GetAllTripDeleted([FromQuery]int pageSize = Int32.MaxValue, int pageNumber = Int32.MaxValue)
         {
-            var query = new GetAllTripDeletedQuery(pageSize);
+            var query = new GetAllTripDeletedQuery(pageSize,pageNumber);
             var result = await _mediator.Send(query);
             if (result.Success)
             {
