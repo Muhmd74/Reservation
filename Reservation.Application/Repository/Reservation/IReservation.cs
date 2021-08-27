@@ -15,6 +15,7 @@ namespace Reservation.Application.Repository.Reservation
         Task<OutputResponse<ReservationResponses>> CreateReservation(CreateReservationCommand model);
         Task<OutputResponse<List<ReservationResponses>>> GetAllReservation(int pageSize=Int32.MaxValue);
         Task<OutputResponse<ReservationResponses>> GetByReservationId(Guid id);
+        Task<OutputResponse<ReservationResponses>> UpdateReservation(UpdateReservationCommand model);
 
     }
 }

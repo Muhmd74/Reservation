@@ -31,7 +31,9 @@ namespace Reservation.WebApi
          public void ConfigureServices(IServiceCollection services)
         {
             services.InstallServicesInAssembly(Configuration);
-           
+            services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+            services.AddHttpContextAccessor();
             services.AddControllers();
         }
 

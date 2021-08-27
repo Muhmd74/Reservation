@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Reservation.Application.Commands;
@@ -95,6 +96,44 @@ namespace Reservation.Application.Repository.Reservation
                 Message = ResponseMessages.NotFound,
                 Success = false
             };
+
+        }
+
+        public async Task<OutputResponse<ReservationResponses>> UpdateReservation(UpdateReservationCommand model)
+        {
+            var currentReservation = await _context.Trips.SingleOrDefaultAsync(d => d.Id == model.Id);
+
+            if (currentReservation != null)
+            {
+                UpdateMapper(model, currentReservation);
+                await _context.SaveChangesAsync();
+                return new OutputResponse<ReservationResponses>()
+                {
+                    Model = _mapperManager.Map<ReservationResponses>(currentReservation),
+                    Message = ResponseMessages.Success,
+                    Success = true
+                };
+            }
+            return new OutputResponse<ReservationResponses>()
+            {
+                Model = null,
+                Message = ResponseMessages.NotFound,
+                Success = false
+            };
+
+        }
+
+        public void UpdateMapper(UpdateReservationCommand target, Trip source)
+        {
+            if (target.Image != null)
+            {
+                source.ImageUrl = _fileService.Upload(target.Image, DirectoryNames.Trip);
+            }
+            source.CityName = target.CityName;
+            source.Content = HttpUtility.HtmlEncode(target.Content);
+            source.Title = target.Title;
+            source.DateTime=DateTime.Now;
+           
 
         }
 

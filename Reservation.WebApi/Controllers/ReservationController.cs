@@ -32,6 +32,15 @@ namespace Reservation.WebApi.Controllers
             var result = await _mediator.Send(model);
             return Ok(result);
         }
+        [HttpPut(Routers.Router.Reservation.UpdateReservation)]
+
+        public async Task<IActionResult> UpdateReservation([FromForm] UpdateReservationCommand model)
+        {
+
+            var result = await _mediator.Send(model);
+            return Ok(result);
+        }
+
         [HttpGet(Routers.Router.Reservation.GetAllReservation)]
 
         public async Task<IActionResult> GetAllReservation(int pageSize=Int32.MaxValue)

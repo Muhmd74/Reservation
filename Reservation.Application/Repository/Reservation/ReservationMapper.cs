@@ -20,8 +20,7 @@ namespace Reservation.Application.Repository.Reservation
             CreateMap<Trip, CreateReservationCommand>()
                 .ForMember(d => d.DateTime,
                     s => s.MapFrom(a => a.DateTime == DateTime.Now))
-                .ForMember(d => d.Price, s => s.MapFrom(a => a.Price == 0))
-                .ForMember(d => d.Content,
+                 .ForMember(d => d.Content,
                     s =>
                         s.MapFrom(a => HttpUtility.HtmlEncode(a.Content))
                 ).ReverseMap();
@@ -29,11 +28,19 @@ namespace Reservation.Application.Repository.Reservation
             CreateMap<Trip, CreateReservationRequest>()
                 .ForMember(d => d.DateTime,
                     s => s.MapFrom(a => a.DateTime == DateTime.Now))
-                .ForMember(d => d.Price, s => s.MapFrom(a => a.Price == 0))
-                .ForMember(d => d.Content,
+                 .ForMember(d => d.Content,
                     s =>
                         s.MapFrom(a => HttpUtility.HtmlEncode(a.Content))
                 ).ReverseMap();
+
+            //Update
+            CreateMap< UpdateReservationCommand, Trip>()
+                      .ForMember(d => d.Price, s => s.MapFrom(a => a.Price == 0))
+                .ForMember(d => d.Content,
+                    s =>
+                        s.MapFrom(a => HttpUtility.HtmlEncode(a.Content))
+                )
+                .ReverseMap();
 
             //GetList
             CreateMap<Trip, ReservationResponses>()
