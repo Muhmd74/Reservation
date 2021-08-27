@@ -7,6 +7,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Reservation.Application.Commands;
 using Reservation.Application.Commands.ReservationCommand;
+using Reservation.Application.Common.Files;
 using Reservation.Application.Common.Response;
 using Reservation.Application.Repository.Reservation.Dtos.Request;
 using Reservation.Application.Repository.Reservation.Dtos.Responses;
@@ -19,17 +20,23 @@ namespace Reservation.Application.Repository.Reservation
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapperManager;
+        private readonly FileService _fileService;
 
-        public ReservationServices(ApplicationDbContext context, IMapper mapperManager)
+        public ReservationServices(ApplicationDbContext context, IMapper mapperManager, FileService fileService)
         {
             _context = context;
             _mapperManager = mapperManager;
+            _fileService = fileService;
         }
 
         public async Task<OutputResponse<ReservationResponses>> CreateReservation(CreateReservationCommand model)
         {
             try
             {
+                if (model.Image != null)
+                {
+                    model.ImageUrl = _fileService.Upload(model.Image, DirectoryNames.Trip);
+                }
                 var trip = _mapperManager.Map<Trip>(model);
                 var result = await _context.Trips.AddAsync(trip);
                 await _context.SaveChangesAsync();

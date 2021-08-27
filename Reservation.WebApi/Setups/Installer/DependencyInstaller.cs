@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Reservation.Application.Common.Files;
 using Reservation.Application.Repository.Reservation;
 using Reservation.Application.Repository.TripUser;
 using Reservation.Application.Repository.User;
@@ -14,6 +15,9 @@ namespace Reservation.WebApi.Setups.Installer
             services.AddScoped<IReservation, ReservationServices>();
             services.AddScoped<ITripUser, TripUserServices>();
             services.AddScoped<IUser, UserServices>();
+            //File
+            services.AddScoped<FileService>();
+            services.AddScoped<UploadCore>();
         }
     }
 }

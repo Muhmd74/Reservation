@@ -26,7 +26,7 @@ namespace Reservation.WebApi.Controllers
 
         [HttpPost(Routers.Router.Reservation.CreateNewReservation)]
 
-        public async Task<IActionResult> CreateNewReservation([FromBody] CreateReservationCommand model)
+        public async Task<IActionResult> CreateNewReservation([FromForm] CreateReservationCommand model)
         {
 
             var result = await _mediator.Send(model);

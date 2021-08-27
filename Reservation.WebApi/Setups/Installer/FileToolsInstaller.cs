@@ -5,13 +5,13 @@ using Microsoft.Extensions.FileProviders;
 
 namespace Reservation.WebApi.Setups.Installer
 {
-    public class FileToolsInstaller  
+    public class FileToolsInstaller
     {
-        //public void InstallServices(IServiceCollection services, IConfiguration configuration)
-        //{
-        //    services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
-        //        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
-        //    services.AddHttpContextAccessor();
-        //}
+        public void InstallServices(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+            services.AddHttpContextAccessor();
+        }
     }
 }

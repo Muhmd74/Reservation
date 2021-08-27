@@ -9,9 +9,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.Extensions.FileProviders;
 using Reservation.Application.Repository.Reservation;
 using Reservation.WebApi.Setups.Installer;
 
@@ -29,11 +31,8 @@ namespace Reservation.WebApi
          public void ConfigureServices(IServiceCollection services)
         {
             services.InstallServicesInAssembly(Configuration);
-   
-  
-            services.AddControllers();
            
-
+            services.AddControllers();
         }
 
          public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Reservation.Infrastructure\Reservation.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\Trip\" />
+  </ItemGroup>
+
 </Project>
