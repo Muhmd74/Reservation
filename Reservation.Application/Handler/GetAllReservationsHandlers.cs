@@ -23,7 +23,7 @@ namespace Reservation.Application.Handler
 
         public async Task<OutputResponse<List<ReservationResponses>>> Handle(GetAllReservationsQuery request, CancellationToken cancellationToken)
         {
-            var result = await _reservation.GetAllReservation();
+            var result = await _reservation.GetAllReservation(request.PageSize);
             return result;
         }
     }

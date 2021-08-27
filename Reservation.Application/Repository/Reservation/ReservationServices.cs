@@ -41,11 +41,12 @@ namespace Reservation.Application.Repository.Reservation
 
         }
 
-        public async Task<OutputResponse<List<ReservationResponses>>> GetAllReservation()
+        public async Task<OutputResponse<List<ReservationResponses>>> GetAllReservation(int pageSize=Int32.MaxValue)
         {
 
             var model = await _context.Trips
                 .OrderByDescending(d => d.DateTime)
+                .Take(pageSize)
                 .ToListAsync();
 
             return new OutputResponse<List<ReservationResponses>>()

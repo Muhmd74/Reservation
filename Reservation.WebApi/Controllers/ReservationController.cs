@@ -25,15 +25,15 @@ namespace Reservation.WebApi.Controllers
 
         public async Task<IActionResult> CreateNewReservation([FromBody] CreateReservationRequest model)
         {
-            var query = new GetAllReservationsQuery();
-            var result = await _mediator.Send(query);
-            return Ok(result);
+            //var query = new GetAllReservationsQuery();
+            //var result = await _mediator.Send(query);
+            return Ok();
         }
         [HttpGet(Routers.Router.Reservation.GetAllReservation)]
 
-        public async Task<IActionResult> GetAllReservation()
+        public async Task<IActionResult> GetAllReservation(int pageSize=Int32.MaxValue)
         {
-            var query = new GetAllReservationsQuery();
+            var query = new GetAllReservationsQuery(pageSize);
             var result = await _mediator.Send(query);
             return Ok(result);
         }

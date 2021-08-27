@@ -11,7 +11,7 @@ namespace Reservation.Application.Repository.Reservation
     public interface IReservation
     {
         Task<CreateReservationRequest> CreateReservation(CreateReservationRequest model);
-        Task<OutputResponse<List<ReservationResponses>>> GetAllReservation();
+        Task<OutputResponse<List<ReservationResponses>>> GetAllReservation(int pageSize=Int32.MaxValue);
         Task<OutputResponse<ReservationResponses>> GetByReservationId(Guid id);
 
     }
