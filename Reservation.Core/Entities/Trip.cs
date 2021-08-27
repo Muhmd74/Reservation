@@ -12,6 +12,7 @@ namespace Reservation.Core.Entities
         public string ImageUrl { get; set; }
         public string CityName { get; set; }
         public DateTime DateTime { get; set; }
+        public bool IsDeleted { get; set; }
         public ICollection<TripUser> TripUsers { get; set; }
  
     }

@@ -65,6 +65,26 @@ namespace Reservation.Application.Repository.Reservation
 
             var model = await _context.Trips
                 .OrderByDescending(d => d.DateTime)
+                .Where(d => d.IsDeleted == false)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new OutputResponse<List<ReservationResponses>>()
+            {
+                Model = _mapperManager.Map<List<ReservationResponses>>(model),
+                Message = ResponseMessages.Success,
+                Success = true
+            };
+
+
+        }
+
+        public async Task<OutputResponse<List<ReservationResponses>>> GetAllReservationDeleted(int pageSize = Int32.MaxValue)
+        {
+
+            var model = await _context.Trips
+                .OrderByDescending(d => d.DateTime)
+                .Where(d => d.IsDeleted)
                 .Take(pageSize)
                 .ToListAsync();
 
@@ -123,6 +143,28 @@ namespace Reservation.Application.Repository.Reservation
 
         }
 
+        public async Task<OutputResponse<bool>> DeleteOrRestore(Guid id)
+        {
+            var result = await _context.Trips.FirstOrDefaultAsync(d => d.Id == id);
+            if (result != null)
+            {
+                result.IsDeleted = !result.IsDeleted;
+                await _context.SaveChangesAsync();
+                return new OutputResponse<bool>()
+                {
+                    Model = result.IsDeleted,
+                    Message = ResponseMessages.Success,
+                    Success = true
+                };
+            }
+            return new OutputResponse<bool>()
+            {
+                Model = false,
+                Message = ResponseMessages.Failure,
+                Success = false
+            };
+        }
+
         public void UpdateMapper(UpdateReservationCommand target, Trip source)
         {
             if (target.Image != null)
@@ -132,8 +174,8 @@ namespace Reservation.Application.Repository.Reservation
             source.CityName = target.CityName;
             source.Content = HttpUtility.HtmlEncode(target.Content);
             source.Title = target.Title;
-            source.DateTime=DateTime.Now;
-           
+            source.DateTime = DateTime.Now;
+
 
         }
 

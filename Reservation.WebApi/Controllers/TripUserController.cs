@@ -26,7 +26,24 @@ namespace Reservation.WebApi.Controllers
         public async Task<IActionResult> Create([FromBody] CreateTripUserCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpPost(Routers.Router.TripUser.Delete)]
+        public async Task<IActionResult> Create([FromBody] DeleteTripUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
         }
 
         [HttpGet(Routers.Router.TripUser.SearchUsers)]
@@ -34,7 +51,12 @@ namespace Reservation.WebApi.Controllers
         {
             var query=new SearchUserQuery(name);
             var result = await _mediator.Send(query);
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
         }
     }
 }

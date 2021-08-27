@@ -30,6 +30,15 @@ namespace Reservation.Application.Repository.TripUser
             try
             {
                 var tripUser = _mapperManager.Map<Core.Entities.TripUser>(model);
+                if (model.UserId==tripUser.UserId&&model.TripId==tripUser.TripId)
+                {
+                    return new OutputResponse<CreateTripUserResponse>()
+                    {
+                        Model = null,
+                        Message = ResponseMessages.Reservation,
+                        Success = true
+                    };
+                }
                 var result = await _context.TripUsers.AddAsync(tripUser);
                 await _context.SaveChangesAsync();
                 return new OutputResponse<CreateTripUserResponse>()
@@ -60,6 +69,28 @@ namespace Reservation.Application.Repository.TripUser
                 Model = _mapperManager.Map<List<GetUsersName>>(result),
                 Message = ResponseMessages.Success,
                 Success = true
+            };
+        }
+
+        public async Task<OutputResponse<bool>> Delete(Guid userId, Guid tripId)
+        {
+            var result = await _context.TripUsers.FirstOrDefaultAsync(d => d.UserId == userId && d.TripId == tripId);
+            if (result != null)
+            {
+                _context.Remove(result);
+                await _context.SaveChangesAsync();
+                return new OutputResponse<bool>()
+                {
+                    Model = true,
+                    Message = ResponseMessages.Success,
+                    Success = true
+                };
+            }
+            return new OutputResponse<bool>()
+            {
+                Model = false,
+                Message = ResponseMessages.NotFound,
+                Success = false
             };
         }
 

@@ -10,8 +10,8 @@ namespace Reservation.Application.Common.Response
         public const string Success = "Data process successfully";
         public const string NotFound =
             "Please check your model as per as required parameters, no data found with this parameters";
-        public const string Exist =
-            "this record already exist";
+        public const string Reservation =
+            "You've Reservation before";
 
         public const string LoginSuccess = "User login successfully";
         public const string LoginFailure = "User credintials error";

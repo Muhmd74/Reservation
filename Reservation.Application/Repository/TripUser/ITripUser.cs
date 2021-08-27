@@ -15,6 +15,7 @@ namespace Reservation.Application.Repository.TripUser
     {
         Task<OutputResponse<CreateTripUserResponse>> CreateTripUser(CreateTripUserCommand model);
         Task<OutputResponse<List<GetUsersName>>> SearchUsers(string name);
+        Task<OutputResponse<bool>> Delete(Guid userId, Guid tripId);
 
     }
 }

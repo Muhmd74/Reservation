@@ -15,15 +15,21 @@ namespace Reservation.WebApi.Routers
         {
             private const string Prefix = Root + "reservation/";
             public const string GetAllReservation = Prefix + "get-all";
+            public const string GetAllReservationDeleted = Prefix + "get-all-deleted";
+
             public const string GetReservationById = Prefix + "get-by-id";
             public const string CreateNewReservation = Prefix + "create";
             public const string UpdateReservation = Prefix + "update";
+            public const string DeleteOrRestoreReservation = Prefix + "delete-or-restore";
+
 
         }
         public static class TripUser
         {
             private const string Prefix = Root + "trip-user/";
             public const string Create = Prefix + "create";
+            public const string Delete = Prefix + "delete";
+
             public const string SearchUsers = Prefix + "search-user-name";
 
 

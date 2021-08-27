@@ -25,14 +25,24 @@ namespace Reservation.WebApi.Controllers
         {
             var query = new GetAllUserQuery(pageSize);
             var result = await _mediator.Send(query);
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
         }
 
         [HttpPut(Routers.Router.User.ChangeActivity)]
-        public async Task<IActionResult> ChangeActivity([FromBody] ChangeActivityCommand model )
+        public async Task<IActionResult> ChangeActivity([FromBody] ChangeActivityCommand command )
         {
-             var result = await _mediator.Send(model);
-            return Ok(result);
+             var result = await _mediator.Send(command);
+             if (result.Success)
+             {
+                 return Ok(result);
+             }
+
+             return BadRequest(result);
         }
     }
 }
