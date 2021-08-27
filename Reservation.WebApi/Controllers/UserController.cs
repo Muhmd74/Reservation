@@ -19,7 +19,17 @@ namespace Reservation.WebApi.Controllers
         {
             _mediator = mediator;
         }
+        [HttpPost(Routers.Router.User.CreateUser)]
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
 
+            return BadRequest(result);
+        }
         [HttpGet(Routers.Router.User.GetAllUser)]
         public async Task<IActionResult> GetAllUser(int pageSize=Int32.MaxValue)
         {

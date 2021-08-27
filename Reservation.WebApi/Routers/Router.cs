@@ -40,6 +40,7 @@ namespace Reservation.WebApi.Routers
         public static class User
         {
             private const string Prefix = Root + "user/";
+            public const string CreateUser = Prefix + "create";
             public const string GetAllUser = Prefix + "get-all";
             public const string ChangeActivity = Prefix + "change-activity";
 

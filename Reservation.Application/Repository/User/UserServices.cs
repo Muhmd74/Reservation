@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Reservation.Application.Commands.UserCommand;
 using Reservation.Application.Common.Response;
 using Reservation.Application.Repository.User.Dtos.Responses;
 using Reservation.Infrastructure.Data.ApplicationDbContext;
@@ -54,6 +55,32 @@ namespace Reservation.Application.Repository.User
                 Message = ResponseMessages.Failure,
                 Success = false
             };
+        }
+
+        public async Task<OutputResponse<GetAllUserResponse>> CreateUser(CreateUserCommand model)
+        {
+            try
+            {
+                var user = _mapperManager.Map<Core.Entities.User>(model);
+                var result = await _context.Users.AddAsync(user);
+                await _context.SaveChangesAsync();
+                return new OutputResponse<GetAllUserResponse>()
+                {
+                    Model = _mapperManager.Map<GetAllUserResponse>(result.Entity),
+                    Message = ResponseMessages.Success,
+                    Success = true
+                };
+            }
+            catch (Exception e)
+            {
+               return new OutputResponse<GetAllUserResponse>()
+               {
+                     Model = null,
+                     Message = e.Message,
+                     Success = false
+               };
+            }
+           
         }
 
 
