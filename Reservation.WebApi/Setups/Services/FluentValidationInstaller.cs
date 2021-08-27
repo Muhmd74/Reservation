@@ -6,9 +6,9 @@ using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
  
-namespace Reservation.WebApi.Setups.Installer
+namespace Reservation.WebApi.Setups.Services
 {
-    //public class FluentValidationInstaller : IInstaller
+    //public class FluentValidationInstaller : IServiceSetup
     //{
     //    public void InstallServices(IServiceCollection services, IConfiguration configuration)
     //    {

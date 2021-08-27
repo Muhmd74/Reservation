@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Reservation.WebApi.Setups.Factory.Services;
 
-namespace Reservation.WebApi.Setups.Installer
+namespace Reservation.WebApi.Setups.Services
 {
-    public class MediatRInstaller : IInstaller
+    public class MediatRServiceSetup : IServiceSetup
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {

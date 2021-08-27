@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 
-namespace Reservation.WebApi.Setups.Installer
+namespace Reservation.WebApi.Setups.Services
 {
     public class FileToolsInstaller
     {

@@ -24,7 +24,7 @@ namespace Reservation.WebApi.Routers
 
 
         }
-        public static class TripUser
+        public static class TripUserReservation
         {
             private const string Prefix = Root + "trip-user/";
             public const string Create = Prefix + "create";

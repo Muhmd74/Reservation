@@ -5,10 +5,11 @@ using Reservation.Application.Common.Files;
 using Reservation.Application.Repository.Trip;
 using Reservation.Application.Repository.TripUser;
 using Reservation.Application.Repository.User;
+using Reservation.WebApi.Setups.Factory.Services;
 
-namespace Reservation.WebApi.Setups.Installer
+namespace Reservation.WebApi.Setups.Services
 {
-    public class DependencyInstaller : IInstaller
+    public class DependencyServiceSetup : IServiceSetup
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {

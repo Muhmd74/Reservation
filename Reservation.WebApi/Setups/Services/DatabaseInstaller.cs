@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Reservation.Infrastructure.Data.ApplicationDbContext;
+using Reservation.WebApi.Setups.Factory.Services;
 
-namespace Reservation.WebApi.Setups.Installer
+namespace Reservation.WebApi.Setups.Services
 {
-    public class DatabaseInstaller : IInstaller
+    public class DatabaseServiceSetup : IServiceSetup
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {

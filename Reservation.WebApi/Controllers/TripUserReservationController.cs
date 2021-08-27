@@ -13,16 +13,16 @@ using Reservation.Application.Query.TripUserQuery;
 namespace Reservation.WebApi.Controllers
 {
  
-    public class TripUserController : ControllerBase
+    public class TripUserReservationController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public TripUserController(IMediator mediator)
+        public TripUserReservationController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [HttpPost(Routers.Router.TripUser.Create)]
+        [HttpPost(Routers.Router.TripUserReservation.Create)]
         public async Task<IActionResult> Create([FromBody] CreateTripUserCommand command)
         {
             var result = await _mediator.Send(command);
@@ -34,7 +34,7 @@ namespace Reservation.WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost(Routers.Router.TripUser.Delete)]
+        [HttpPost(Routers.Router.TripUserReservation.Delete)]
         public async Task<IActionResult> Create([FromBody] DeleteTripUserCommand command)
         {
             var result = await _mediator.Send(command);
@@ -46,7 +46,7 @@ namespace Reservation.WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet(Routers.Router.TripUser.SearchUsers)]
+        [HttpGet(Routers.Router.TripUserReservation.SearchUsers)]
         public async Task<IActionResult> Create([FromQuery]string name)
         {
             var query=new SearchUserQuery(name);
