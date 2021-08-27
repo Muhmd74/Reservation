@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Reservation.Application.Repository.Reservation;
+using Reservation.Application.Repository.Trip;
 using Reservation.Application.Repository.TripUser;
 using Reservation.Application.Repository.User;
 using Reservation.Core.Interface;
@@ -18,7 +18,7 @@ namespace Reservation.WebApi.Setups.Installer
             services.AddAutoMapper(typeof(Startup));
             services.AddAutoMapper(a =>
             {
-                a.AddProfile<ReservationMapper>();
+                a.AddProfile<TripMapper>();
                 a.AddProfile<TripUserMapper>();
                 a.AddProfile<UserMapper>();
             });

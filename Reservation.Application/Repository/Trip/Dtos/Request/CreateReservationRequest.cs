@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Reservation.Application.Repository.Reservation.Dtos.Request
+namespace Reservation.Application.Repository.Trip.Dtos.Request
 {
-  public class CreateReservationRequest
+  public class CreateTripRequest
     {
         public string Title { get; set; }
         public string Content { get; set; }

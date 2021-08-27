@@ -11,16 +11,16 @@ namespace Reservation.WebApi.Routers
         private const string Version = "v1/";
         private const string Root = Base + Version;
 
-        public static class Reservation
+        public static class Trip
         {
-            private const string Prefix = Root + "reservation/";
-            public const string GetAllReservation = Prefix + "get-all";
-            public const string GetAllReservationDeleted = Prefix + "get-all-deleted";
+            private const string Prefix = Root + "trip/";
+            public const string GetAllTrip = Prefix + "get-all";
+            public const string GetAllTripDeleted = Prefix + "get-all-deleted";
 
-            public const string GetReservationById = Prefix + "get-by-id";
-            public const string CreateNewReservation = Prefix + "create";
-            public const string UpdateReservation = Prefix + "update";
-            public const string DeleteOrRestoreReservation = Prefix + "delete-or-restore";
+            public const string GetTripById = Prefix + "get-by-id";
+            public const string CreateNewTrip = Prefix + "create";
+            public const string UpdateTrip = Prefix + "update";
+            public const string DeleteOrRestoreTrip = Prefix + "delete-or-restore";
 
 
         }

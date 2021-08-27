@@ -4,9 +4,9 @@
 //using System.Threading.Tasks;
 //using Microsoft.AspNetCore.Mvc;
 //using Microsoft.AspNetCore.Mvc.Filters;
-//using Reservation.Application.Common.Response;
+//using Trip.Application.Common.Response;
 
-//namespace Reservation.WebApi.Setups.Filters
+//namespace Trip.WebApi.Setups.Filters
 //{
 //    public class ValidatorActionFilter : IAsyncActionFilter
 //    {

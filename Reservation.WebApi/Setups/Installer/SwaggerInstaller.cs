@@ -10,7 +10,7 @@ namespace Reservation.WebApi.Setups.Installer
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Reservation.WebApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Trip.WebApi", Version = "v1" });
             });
         }
     }

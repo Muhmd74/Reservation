@@ -2,11 +2,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Reservation.Application.Common.Response;
-using Reservation.Application.Repository.Reservation.Dtos.Responses;
+using Reservation.Application.Repository.Trip.Dtos.Responses;
 
-namespace Reservation.Application.Commands.ReservationCommand
+namespace Reservation.Application.Commands.TripCommand
 {
-  public  class CreateReservationCommand : IRequest<OutputResponse<ReservationResponses>>
+  public  class CreateTripCommand : IRequest<OutputResponse<TripResponses>>
     {
         public string Title { get; set; }
         public string Content { get; set; }

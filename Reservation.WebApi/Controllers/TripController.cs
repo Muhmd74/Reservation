@@ -6,30 +6,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Reservation.Application.Commands;
-using Reservation.Application.Commands.ReservationCommand;
+using Reservation.Application.Commands.TripCommand;
 using Reservation.Application.Commands.UserCommand;
 using Reservation.Application.Common.Response;
 using Reservation.Application.Handler;
 using Reservation.Application.Query;
-using Reservation.Application.Query.ReservationQuery;
-using Reservation.Application.Repository.Reservation.Dtos.Request;
-using Reservation.Application.Repository.Reservation.Dtos.Responses;
+using Reservation.Application.Query.TripQuery;
 
 namespace Reservation.WebApi.Controllers
 {
 
-    public class ReservationController : ControllerBase
+    public class TripController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public ReservationController(IMediator mediator)
+        public TripController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [HttpPost(Routers.Router.Reservation.CreateNewReservation)]
+        [HttpPost(Routers.Router.Trip.CreateNewTrip)]
 
-        public async Task<IActionResult> CreateNewReservation([FromForm] CreateReservationCommand model)
+        public async Task<IActionResult> CreateNewTrip([FromForm] CreateTripCommand model)
         {
 
             var result = await _mediator.Send(model);
@@ -40,9 +38,9 @@ namespace Reservation.WebApi.Controllers
 
             return BadRequest(result);
         }
-        [HttpPut(Routers.Router.Reservation.UpdateReservation)]
+        [HttpPut(Routers.Router.Trip.UpdateTrip)]
 
-        public async Task<IActionResult> UpdateReservation([FromForm] UpdateReservationCommand model)
+        public async Task<IActionResult> UpdateReservation([FromForm] UpdateTripCommand model)
         {
 
             var result = await _mediator.Send(model);
@@ -54,11 +52,11 @@ namespace Reservation.WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet(Routers.Router.Reservation.GetAllReservation)]
+        [HttpGet(Routers.Router.Trip.GetAllTrip)]
 
-        public async Task<IActionResult> GetAllReservation(int pageSize = Int32.MaxValue)
+        public async Task<IActionResult> GetAllTrip(int pageSize = Int32.MaxValue)
         {
-            var query = new GetAllReservationsQuery(pageSize);
+            var query = new GetAllTripQuery(pageSize);
             var result = await _mediator.Send(query);
             if (result.Success)
             {
@@ -68,11 +66,11 @@ namespace Reservation.WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet(Routers.Router.Reservation.GetAllReservationDeleted)]
+        [HttpGet(Routers.Router.Trip.GetAllTripDeleted)]
 
-        public async Task<IActionResult> GetAllReservationDeleted(int pageSize = Int32.MaxValue)
+        public async Task<IActionResult> GetAllTripDeleted(int pageSize = Int32.MaxValue)
         {
-            var query = new GetAllReservationDeletedQuery(pageSize);
+            var query = new GetAllTripDeletedQuery(pageSize);
             var result = await _mediator.Send(query);
             if (result.Success)
             {
@@ -82,11 +80,11 @@ namespace Reservation.WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet(Routers.Router.Reservation.GetReservationById)]
+        [HttpGet(Routers.Router.Trip.GetTripById)]
 
-        public async Task<IActionResult> GetReservationById([FromQuery] Guid id)
+        public async Task<IActionResult> GetTripById([FromQuery] Guid id)
         {
-            var query = new GetReservationByIdQuery(id);
+            var query = new GetTripByIdQuery(id);
             var result = await _mediator.Send(query);
             if (result.Success)
             {
@@ -96,8 +94,8 @@ namespace Reservation.WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPut(Routers.Router.Reservation.DeleteOrRestoreReservation)]
-        public async Task<IActionResult> DeleteOrRestoreReservation([FromBody] DeleteOrRestoreReservationCommand command)
+        [HttpPut(Routers.Router.Trip.DeleteOrRestoreTrip)]
+        public async Task<IActionResult> DeleteOrRestoreTrip([FromBody] DeleteOrRestoreTripCommand command)
         {
             var result = await _mediator.Send(command);
             if (result.Success)

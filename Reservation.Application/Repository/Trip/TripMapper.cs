@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Web;
 using AutoMapper;
-using Reservation.Application.Commands;
-using Reservation.Application.Commands.ReservationCommand;
-using Reservation.Application.Repository.Reservation.Dtos.Request;
-using Reservation.Application.Repository.Reservation.Dtos.Responses;
-using Reservation.Core.Entities;
-using Reservation.Core.Interface;
+using Reservation.Application.Commands.TripCommand;
+using Reservation.Application.Repository.Trip.Dtos.Request;
+using Reservation.Application.Repository.Trip.Dtos.Responses;
 
-namespace Reservation.Application.Repository.Reservation
+namespace Reservation.Application.Repository.Trip
 {
-    public class ReservationMapper : Profile
+    public class TripMapper : Profile
     {
-        public ReservationMapper()
+        public TripMapper()
         {
             //create
-            CreateMap<Trip, CreateReservationCommand>()
+            CreateMap<Core.Entities.Trip, CreateTripCommand>()
                 .ForMember(d => d.DateTime,
                     s => s.MapFrom(a => a.DateTime == DateTime.Now))
                  .ForMember(d => d.Content,
@@ -25,7 +20,7 @@ namespace Reservation.Application.Repository.Reservation
                         s.MapFrom(a => HttpUtility.HtmlEncode(a.Content))
                 ).ReverseMap();
 
-            CreateMap<Trip, CreateReservationRequest>()
+            CreateMap<Core.Entities.Trip, CreateTripRequest>()
                 .ForMember(d => d.DateTime,
                     s => s.MapFrom(a => a.DateTime == DateTime.Now))
                  .ForMember(d => d.Content,
@@ -34,7 +29,7 @@ namespace Reservation.Application.Repository.Reservation
                 ).ReverseMap();
 
             //Update
-            CreateMap< UpdateReservationCommand, Trip>()
+            CreateMap< UpdateTripCommand, Core.Entities.Trip>()
                       .ForMember(d => d.Price, s => s.MapFrom(a => a.Price == 0))
                 .ForMember(d => d.Content,
                     s =>
@@ -43,14 +38,14 @@ namespace Reservation.Application.Repository.Reservation
                 .ReverseMap();
 
             //GetList
-            CreateMap<Trip, ReservationResponses>()
+            CreateMap<Core.Entities.Trip, TripResponses>()
                 .ForMember(d => d.Content,
                     s => s.MapFrom(a => a.Content != null
                         ? HttpUtility.HtmlDecode(a.Content)
                         : a.Content))
                 .ReverseMap();
             //GetDetails
-            CreateMap<Trip, ReservationDetailsResponses>()
+            CreateMap<Core.Entities.Trip, TripDetailsResponses>()
                 .ForMember(d => d.Content,
                     s => s.MapFrom(a => a.Content != null
                         ? HttpUtility.HtmlDecode(a.Content)

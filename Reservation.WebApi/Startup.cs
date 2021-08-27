@@ -14,7 +14,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.FileProviders;
-using Reservation.Application.Repository.Reservation;
 using Reservation.WebApi.Setups.Installer;
 
 namespace Reservation.WebApi
@@ -43,7 +42,7 @@ namespace Reservation.WebApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Reservation.WebApi v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Trip.WebApi v1"));
             }
 
             app.UseRouting();

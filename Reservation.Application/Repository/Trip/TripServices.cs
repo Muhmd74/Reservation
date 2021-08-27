@@ -1,36 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Reservation.Application.Commands;
-using Reservation.Application.Commands.ReservationCommand;
+using Reservation.Application.Commands.TripCommand;
 using Reservation.Application.Common.Files;
 using Reservation.Application.Common.Response;
-using Reservation.Application.Repository.Reservation.Dtos.Request;
-using Reservation.Application.Repository.Reservation.Dtos.Responses;
-using Reservation.Core.Entities;
+using Reservation.Application.Repository.Trip.Dtos.Responses;
 using Reservation.Infrastructure.Data.ApplicationDbContext;
 
-namespace Reservation.Application.Repository.Reservation
+namespace Reservation.Application.Repository.Trip
 {
-    public class ReservationServices : IReservation, IDisposable
+    public class TripServices : ITrip, IDisposable
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapperManager;
         private readonly FileService _fileService;
 
-        public ReservationServices(ApplicationDbContext context, IMapper mapperManager, FileService fileService)
+        public TripServices(ApplicationDbContext context, IMapper mapperManager, FileService fileService)
         {
             _context = context;
             _mapperManager = mapperManager;
             _fileService = fileService;
         }
 
-        public async Task<OutputResponse<ReservationResponses>> CreateReservation(CreateReservationCommand model)
+        public async Task<OutputResponse<TripResponses>> CreateTrip(CreateTripCommand model)
         {
             try
             {
@@ -38,19 +34,19 @@ namespace Reservation.Application.Repository.Reservation
                 {
                     model.ImageUrl = _fileService.Upload(model.Image, DirectoryNames.Trip);
                 }
-                var trip = _mapperManager.Map<Trip>(model);
+                var trip = _mapperManager.Map<Core.Entities.Trip>(model);
                 var result = await _context.Trips.AddAsync(trip);
                 await _context.SaveChangesAsync();
-                return new OutputResponse<ReservationResponses>()
+                return new OutputResponse<TripResponses>()
                 {
-                    Model = _mapperManager.Map<ReservationResponses>(result.Entity),
+                    Model = _mapperManager.Map<TripResponses>(result.Entity),
                     Message = ResponseMessages.Success,
                     Success = true
                 };
             }
             catch (Exception e)
             {
-                return new OutputResponse<ReservationResponses>()
+                return new OutputResponse<TripResponses>()
                 {
                     Model = null,
                     Message = e.Message,
@@ -60,7 +56,7 @@ namespace Reservation.Application.Repository.Reservation
 
         }
 
-        public async Task<OutputResponse<List<ReservationResponses>>> GetAllReservation(int pageSize = Int32.MaxValue)
+        public async Task<OutputResponse<List<TripResponses>>> GetAllTrip(int pageSize = Int32.MaxValue)
         {
 
             var model = await _context.Trips
@@ -69,9 +65,9 @@ namespace Reservation.Application.Repository.Reservation
                 .Take(pageSize)
                 .ToListAsync();
 
-            return new OutputResponse<List<ReservationResponses>>()
+            return new OutputResponse<List<TripResponses>>()
             {
-                Model = _mapperManager.Map<List<ReservationResponses>>(model),
+                Model = _mapperManager.Map<List<TripResponses>>(model),
                 Message = ResponseMessages.Success,
                 Success = true
             };
@@ -79,7 +75,7 @@ namespace Reservation.Application.Repository.Reservation
 
         }
 
-        public async Task<OutputResponse<List<ReservationResponses>>> GetAllReservationDeleted(int pageSize = Int32.MaxValue)
+        public async Task<OutputResponse<List<TripResponses>>> GetAllTripDeleted(int pageSize = Int32.MaxValue)
         {
 
             var model = await _context.Trips
@@ -88,9 +84,9 @@ namespace Reservation.Application.Repository.Reservation
                 .Take(pageSize)
                 .ToListAsync();
 
-            return new OutputResponse<List<ReservationResponses>>()
+            return new OutputResponse<List<TripResponses>>()
             {
-                Model = _mapperManager.Map<List<ReservationResponses>>(model),
+                Model = _mapperManager.Map<List<TripResponses>>(model),
                 Message = ResponseMessages.Success,
                 Success = true
             };
@@ -98,19 +94,19 @@ namespace Reservation.Application.Repository.Reservation
 
         }
 
-        public async Task<OutputResponse<ReservationResponses>> GetByReservationId(Guid id)
+        public async Task<OutputResponse<TripResponses>> GetByTripId(Guid id)
         {
             var model = await _context.Trips.FirstOrDefaultAsync(d => d.Id == id);
             if (model != null)
             {
-                return new OutputResponse<ReservationResponses>()
+                return new OutputResponse<TripResponses>()
                 {
-                    Model = _mapperManager.Map<ReservationResponses>(model),
+                    Model = _mapperManager.Map<TripResponses>(model),
                     Message = ResponseMessages.Success,
                     Success = true
                 };
             }
-            return new OutputResponse<ReservationResponses>()
+            return new OutputResponse<TripResponses>()
             {
                 Model = null,
                 Message = ResponseMessages.NotFound,
@@ -119,22 +115,22 @@ namespace Reservation.Application.Repository.Reservation
 
         }
 
-        public async Task<OutputResponse<ReservationResponses>> UpdateReservation(UpdateReservationCommand model)
+        public async Task<OutputResponse<TripResponses>> UpdateTrip(UpdateTripCommand model)
         {
-            var currentReservation = await _context.Trips.SingleOrDefaultAsync(d => d.Id == model.Id);
+            var currentTrip = await _context.Trips.FirstOrDefaultAsync(d => d.Id == model.Id);
 
-            if (currentReservation != null)
+            if (currentTrip != null)
             {
-                UpdateMapper(model, currentReservation);
+                UpdateMapper(model, currentTrip);
                 await _context.SaveChangesAsync();
-                return new OutputResponse<ReservationResponses>()
+                return new OutputResponse<TripResponses>()
                 {
-                    Model = _mapperManager.Map<ReservationResponses>(currentReservation),
+                    Model = _mapperManager.Map<TripResponses>(currentTrip),
                     Message = ResponseMessages.Success,
                     Success = true
                 };
             }
-            return new OutputResponse<ReservationResponses>()
+            return new OutputResponse<TripResponses>()
             {
                 Model = null,
                 Message = ResponseMessages.NotFound,
@@ -165,7 +161,7 @@ namespace Reservation.Application.Repository.Reservation
             };
         }
 
-        public void UpdateMapper(UpdateReservationCommand target, Trip source)
+        public void UpdateMapper(UpdateTripCommand target, Core.Entities.Trip source)
         {
             if (target.Image != null)
             {

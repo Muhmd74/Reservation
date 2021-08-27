@@ -4,9 +4,9 @@ using System.Text;
 using MediatR;
 using Reservation.Application.Common.Response;
 
-namespace Reservation.Application.Commands.ReservationCommand
+namespace Reservation.Application.Commands.TripCommand
 {
-    public class DeleteOrRestoreReservationCommand : IRequest<OutputResponse<bool>>
+    public class DeleteOrRestoreTripCommand : IRequest<OutputResponse<bool>>
     {
 
         public Guid TripId { get; set; }

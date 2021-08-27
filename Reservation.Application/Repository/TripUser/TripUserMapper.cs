@@ -4,7 +4,6 @@ using System.Text;
 using AutoMapper;
 using Reservation.Application.Commands;
 using Reservation.Application.Commands.TripUserCommand;
-using Reservation.Application.Repository.Reservation.Dtos.Request;
 using Reservation.Application.Repository.TripUser.Dtos.Responses;
 using Reservation.Core.Helpers.TripUser;
 

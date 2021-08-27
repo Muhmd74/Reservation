@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Reservation.Application.Repository.Reservation.Dtos.Responses
+namespace Reservation.Application.Repository.Trip.Dtos.Responses
 {
-  public  class ReservationResponses
+  public  class TripResponses
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
