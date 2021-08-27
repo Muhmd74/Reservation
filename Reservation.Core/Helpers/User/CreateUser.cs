@@ -24,7 +24,7 @@ namespace Reservation.Core.Helpers.User
                 {
                     Address = "Cairo",
                     Email = "Ahmed43@Icloud.com",
-                    Name = "Admin",
+                    Name = "Ahmed Magdy",
                     Phone = "01022453576",
                     UserType = UserType.Customer,
                     Password = "Ahmed43@Icloud.com",
@@ -44,7 +44,7 @@ namespace Reservation.Core.Helpers.User
                 {
                     Address = "Alexandria",
                     Email = "Mazen12@Yahoo.com",
-                    Name = "Admin",
+                    Name = "Mazen",
                     Phone = "01093355434",
                     UserType = UserType.Customer,
                     Password = "Mazen12@Yahoo.com",
@@ -54,7 +54,7 @@ namespace Reservation.Core.Helpers.User
                 {
                     Address = "Giza",
                     Email = "Ali55@Icloud.com",
-                    Name = "Admin",
+                    Name = "Ali Mohamed",
                     Phone = "01094242323",
                     UserType = UserType.Customer,
                     Password = "Ali55@Icloud.com",

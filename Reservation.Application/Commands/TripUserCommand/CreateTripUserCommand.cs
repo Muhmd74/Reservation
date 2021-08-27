@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using MediatR;
 using Reservation.Application.Common.Response;
 using Reservation.Application.Repository.TripUser.Dtos.Responses;
 
-namespace Reservation.Application.Commands
+namespace Reservation.Application.Commands.TripUserCommand
 {
     public class CreateTripUserCommand : IRequest<OutputResponse<CreateTripUserResponse>>
     {

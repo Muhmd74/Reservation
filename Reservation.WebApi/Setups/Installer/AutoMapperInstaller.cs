@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Reservation.Application.Repository.Reservation;
 using Reservation.Application.Repository.TripUser;
+using Reservation.Application.Repository.User;
 using Reservation.Core.Interface;
 
 namespace Reservation.WebApi.Setups.Installer
@@ -19,6 +20,7 @@ namespace Reservation.WebApi.Setups.Installer
             {
                 a.AddProfile<ReservationMapper>();
                 a.AddProfile<TripUserMapper>();
+                a.AddProfile<UserMapper>();
             });
 
         }

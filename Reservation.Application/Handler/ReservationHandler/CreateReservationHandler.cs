@@ -2,11 +2,12 @@
 using System.Threading.Tasks;
 using MediatR;
 using Reservation.Application.Commands;
+using Reservation.Application.Commands.ReservationCommand;
 using Reservation.Application.Common.Response;
 using Reservation.Application.Repository.Reservation;
 using Reservation.Application.Repository.Reservation.Dtos.Responses;
 
-namespace Reservation.Application.Handler
+namespace Reservation.Application.Handler.ReservationHandler
 {
     public class CreateReservationHandler : IRequestHandler<CreateReservationCommand, OutputResponse<ReservationResponses>>
     {

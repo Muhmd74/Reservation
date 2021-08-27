@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using MediatR;
 using Reservation.Application.Common.Response;
 using Reservation.Application.Query;
+using Reservation.Application.Query.ReservationQuery;
 using Reservation.Application.Repository.Reservation;
 using Reservation.Application.Repository.Reservation.Dtos.Responses;
 
-namespace Reservation.Application.Handler
+namespace Reservation.Application.Handler.ReservationHandler
 {
     public class GetAllReservationsHandlers : IRequestHandler<GetAllReservationsQuery, OutputResponse<List<ReservationResponses>>>
     {

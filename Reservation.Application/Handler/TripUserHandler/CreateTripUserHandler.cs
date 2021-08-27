@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Reservation.Application.Commands;
+using Reservation.Application.Commands.TripUserCommand;
 using Reservation.Application.Common.Response;
 using Reservation.Application.Repository.TripUser;
 using Reservation.Application.Repository.TripUser.Dtos.Responses;
 
-namespace Reservation.Application.Handler
+namespace Reservation.Application.Handler.TripUserHandler
 {
     public class CreateTripUserHandler : IRequestHandler<CreateTripUserCommand, OutputResponse<CreateTripUserResponse>>
     {

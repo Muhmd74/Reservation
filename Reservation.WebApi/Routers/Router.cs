@@ -14,9 +14,9 @@ namespace Reservation.WebApi.Routers
         public static class Reservation
         {
             private const string Prefix = Root + "reservation/";
-            public const string GetAllReservation = Prefix + "gets-reservations";
-            public const string GetReservationById = Prefix + "get-reservation-by-id";
-            public const string CreateNewReservation = Prefix + "create-reservation";
+            public const string GetAllReservation = Prefix + "get-all";
+            public const string GetReservationById = Prefix + "get-by-id";
+            public const string CreateNewReservation = Prefix + "create";
 
 
         }
@@ -24,8 +24,20 @@ namespace Reservation.WebApi.Routers
         {
             private const string Prefix = Root + "trip-user/";
             public const string Create = Prefix + "create";
-            public const string GetReservationById = Prefix + "get-reservation-by-id";
-            public const string CreateNewReservation = Prefix + "create-reservation";
+            public const string SearchUsers = Prefix + "search-user-name";
+
+
+
+
+        }
+
+        public static class User
+        {
+            private const string Prefix = Root + "user/";
+            public const string GetAllUser = Prefix + "get-all";
+            public const string ChangeActivity = Prefix + "change-activity";
+
+
 
 
         }

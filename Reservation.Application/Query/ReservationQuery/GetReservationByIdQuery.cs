@@ -3,7 +3,7 @@ using MediatR;
 using Reservation.Application.Common.Response;
 using Reservation.Application.Repository.Reservation.Dtos.Responses;
 
-namespace Reservation.Application.Query
+namespace Reservation.Application.Query.ReservationQuery
 {
    public class GetReservationByIdQuery : IRequest<OutputResponse<ReservationResponses>>
     {

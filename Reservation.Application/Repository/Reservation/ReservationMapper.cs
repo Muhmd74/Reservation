@@ -4,6 +4,7 @@ using System.Text;
 using System.Web;
 using AutoMapper;
 using Reservation.Application.Commands;
+using Reservation.Application.Commands.ReservationCommand;
 using Reservation.Application.Repository.Reservation.Dtos.Request;
 using Reservation.Application.Repository.Reservation.Dtos.Responses;
 using Reservation.Core.Entities;

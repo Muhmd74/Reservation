@@ -6,8 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Reservation.Application.Commands;
+using Reservation.Application.Commands.ReservationCommand;
 using Reservation.Application.Handler;
 using Reservation.Application.Query;
+using Reservation.Application.Query.ReservationQuery;
 using Reservation.Application.Repository.Reservation.Dtos.Request;
 
 namespace Reservation.WebApi.Controllers

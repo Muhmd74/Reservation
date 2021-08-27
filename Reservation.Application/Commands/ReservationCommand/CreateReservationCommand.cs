@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using MediatR;
 using Reservation.Application.Common.Response;
-using Reservation.Application.Repository.Reservation.Dtos.Request;
 using Reservation.Application.Repository.Reservation.Dtos.Responses;
 
-namespace Reservation.Application.Commands
+namespace Reservation.Application.Commands.ReservationCommand
 {
   public  class CreateReservationCommand : IRequest<OutputResponse<ReservationResponses>>
     {

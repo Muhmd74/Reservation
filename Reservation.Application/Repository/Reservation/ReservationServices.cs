@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Reservation.Application.Commands;
+using Reservation.Application.Commands.ReservationCommand;
 using Reservation.Application.Common.Response;
 using Reservation.Application.Repository.Reservation.Dtos.Request;
 using Reservation.Application.Repository.Reservation.Dtos.Responses;

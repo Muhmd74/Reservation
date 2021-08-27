@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
 using Reservation.Application.Commands;
+using Reservation.Application.Commands.TripUserCommand;
 using Reservation.Application.Repository.Reservation.Dtos.Request;
 using Reservation.Application.Repository.TripUser.Dtos.Responses;
 using Reservation.Core.Helpers.TripUser;
@@ -22,6 +23,11 @@ namespace Reservation.Application.Repository.TripUser
             CreateMap<Core.Entities.TripUser, CreateTripUserResponse>()
                 .ForMember(d => d.TripId, s => s.MapFrom(a => a.TripId))
                 .ForMember(d => d.UserId, s => s.MapFrom(a => a.UserId))
+                .ReverseMap();
+
+            //GetName
+            CreateMap<Core.Entities.User, GetUsersName>()
+                .ForMember(d => d.UserId, s => s.MapFrom(a => a.Id))
                 .ReverseMap();
         }
     }
