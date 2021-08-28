@@ -10,10 +10,12 @@ namespace Reservation.Application.Commands.TripCommand
     public class CreateTripCommand : IRequest<OutputResponse<TripResponses>>
     {
         
+        [Required]
+       
         public string Title { get; set; }
         public string Content { get; set; }
         [Required]
-        [MinLength(300)]
+       
         public decimal Price { get; set; }
         public IFormFile Image { get; set; }
         public string ImageUrl { get; set; }

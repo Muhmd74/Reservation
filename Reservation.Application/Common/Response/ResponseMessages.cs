@@ -13,10 +13,5 @@ namespace Reservation.Application.Common.Response
         public const string Reservation =
             "You've Reservation before";
 
-        public const string LoginSuccess = "User login successfully";
-        public const string LoginFailure = "User credintials error";
-        //Repeat Phone Number
-        public const string ErrorPassword = "Password is not correct  ";
-        public const string RepeatName = "Name is not exist  ";
     }
 }

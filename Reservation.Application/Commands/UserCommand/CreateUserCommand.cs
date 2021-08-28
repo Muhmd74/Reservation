@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using MediatR;
@@ -19,6 +20,7 @@ namespace Reservation.Application.Commands.UserCommand
         [Required]
         public string Email { get; set; }
         [Required]
+        [PasswordPropertyText]
         public string Password { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
