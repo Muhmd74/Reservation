@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Reservation.Core.Entities;
@@ -20,15 +21,13 @@ namespace Reservation.WebUI.Controllers
             _context = context;
         }
         [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Register()
+         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -52,6 +51,12 @@ namespace Reservation.WebUI.Controllers
 
             return View(model);
         }
+
+         public IActionResult LogOut()
+         {
+             HttpContext.Session.Clear();
+             return RedirectToAction("Login");
+        }
         [HttpGet]
          public IActionResult Login()
         {
@@ -74,8 +79,9 @@ namespace Reservation.WebUI.Controllers
                     }
                     else
                     {
-                        TempData["UserId"] = result.Id;
-                        return RedirectToAction("index", "Home");
+                    HttpContext.Session.SetString("UserId",result.Id.ToString());
+
+                         return RedirectToAction("index", "Home");
                     }
                 }
 

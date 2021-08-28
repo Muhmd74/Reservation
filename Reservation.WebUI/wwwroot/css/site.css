@@ -69,3 +69,74 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.card-content {
+    color: #9DBFAF;
+}
+
+.card {
+    width: 22%;
+    display: inline-block;
+    padding: 3px;
+    box-shadow: 2px 2px 20px black;
+    margin: 1.5% 1% 0%1.5%;
+    text-align: center;
+    font-family: arial;
+}
+
+.price {
+    color: grey;
+    font-size: 14px;
+    text-align: center;
+}
+
+.price-di {
+    color: grey;
+    font-size: 19px;
+    text-align: right;
+    margin-right: 3px;
+}
+
+.card .image img {
+    width: 100%;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+
+.card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: gainsboro;
+    outline: #fdf5e6;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.p-title {
+    margin-top: 5px;
+}
+
+.card button:hover {
+    background-color: brown;
+    color: white;
+    transition: .5s;
+    cursor: pointer;
+}
+
+
+.textboxs {
+    background: transparent url(/images/css/input-text-8.jpg) repeat-x;
+    border: 1px solid #999;
+    outline: 0;
+    height: 25px;
+    width: 275px;
+}
+
+.poster {
+    background-size: 100%;
+    width: 40%;
+    height: 30%
+}

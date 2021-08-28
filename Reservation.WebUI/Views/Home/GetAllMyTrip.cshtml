@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Reservation.WebUI.ViewModel.MyReservationViewModel>
+@{
+    ViewData["Title"] = "My Trip";
+}
+
+<h2 style="text-align: center ">Reservations @Model.FirstOrDefault().UserName</h2>
+<hr style="text-align: center " />
+
+
+<hr />
+<div class="card-content">
+    <div class="card-items">
+        @foreach (var trip in Model)
+        {
+
+            <div class="card">
+
+                <div class="image">
+                    <img src="https://thealmanian.com/wp-content/uploads/2019/01/product_image_thumbnail_placeholder.png">
+                </div>
+                <p>@(trip.Title.Length > 25 ? $"{trip.Title.Substring(0, 25)}.." : trip.Title)</p>
+
+                <div>
+                    <p class="price">$ @trip.Price </p>
+                   
+                </div>
+
+                <p>@(trip.CityName)</p>
+            </div>
+        }
+    </div>
+</div>

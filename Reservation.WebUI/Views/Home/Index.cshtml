@@ -35,7 +35,7 @@
 
                 <p>@(trip.CityName)</p>
 
-                @if (TempData["UserId"] == null)
+                @if (@ViewBag.data == null)
                 {
                     <p>
 
@@ -50,7 +50,7 @@
                 {
                     <p>
 
-                        <form asp-controller="Home" asp-action="Reservation" asp-route-id="@trip.Id">
+                        <form asp-controller="Home" asp-action="Reservation" asp-route-id="@trip.Id" asp-route-tripId="@trip.Id">
                             <input type="submit" value="Reservation" style="width: 100% ;" class="btn btn-outline-primary" />
                         </form>
 
