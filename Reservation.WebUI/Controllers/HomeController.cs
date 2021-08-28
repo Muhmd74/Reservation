@@ -89,9 +89,32 @@ namespace Reservation.WebUI.Controllers
                     ImageUrl = d.Trip.ImageUrl,
                     Price = d.Trip.Price,
                     Title = d.Trip.Title,
-                    UserName = d.User.Name
+                    UserName = d.User.Name,
+                    Id = d.TripId
                 }).ToListAsync();
             return View(model);
+        }
+        [HttpGet]
+        public IActionResult CancelBook()
+        {
+          
+            return View("GetAllMyTrip");
+        }
+        public async Task<IActionResult> CancelBook(Guid tripId)
+        {
+            ViewBag.data = HttpContext.Session.GetString("UserId");
+            var userId = new Guid(ViewBag.data);
+            var model = await _context.TripUsers.FirstOrDefaultAsync(d => d.TripId == tripId && d.UserId == userId);
+            if (model!=null)
+            {
+                _context.TripUsers.Remove(model);
+                await _context.SaveChangesAsync();
+                _toastNotification.AddSuccessToastMessage(" booked is cancel");
+
+                return RedirectToAction("GetAllMyTrip");
+            }
+
+            return View("GetAllMyTrip");
         }
     }
 }

@@ -29,22 +29,7 @@ namespace Reservation.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>();
             services.InstallServicesInAssembly(Configuration);
-            services.AddScoped<ITrip, TripServices>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ITripUser, TripUserServices>();
-            services.AddScoped<IUser, UserServices>();
-            services.AddAutoMapper(typeof(Startup));
-            services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(60);
-            });
-            services.AddAutoMapper(a =>
-            {
-                a.AddProfile<TripMapper>();
-                a.AddProfile<TripUserMapper>();
-                a.AddProfile<UserMapper>();
-            });
             services.AddControllersWithViews();
         }
 

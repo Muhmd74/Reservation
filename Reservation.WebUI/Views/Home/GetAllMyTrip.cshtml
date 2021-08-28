@@ -8,8 +8,7 @@
 <hr style="text-align: center " />
 
 
-<hr />
-<div class="card-content">
+ <div class="card-content">
     <div class="card-items">
         @foreach (var trip in Model)
         {
@@ -27,6 +26,15 @@
                 </div>
 
                 <p>@(trip.CityName)</p>
+                
+                <p>
+
+                    <form asp-controller="Home" asp-action="CancelBook" asp-route-id="@trip.Id" asp-route-tripId="@trip.Id">
+                        <input type="submit" value="Reservation" style="width: 100% ;" class="btn btn-outline-danger" />
+                    </form>
+
+
+                </p>
             </div>
         }
     </div>
