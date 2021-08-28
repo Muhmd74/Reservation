@@ -20,8 +20,9 @@ namespace Reservation.Infrastructure.Data.ModelConfigurations
             //Title
             builder.Property(d => d.Title)
                 .HasMaxLength(200);
+            builder.Property(d => d.DateTime)
+                .HasDefaultValue(DateTime.Now);
 
-          
         }
     }
 }

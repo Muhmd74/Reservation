@@ -9,6 +9,7 @@ namespace Reservation.Application.Common.Response
         public bool Success { get; set; }
         public object Message { get; set; }
         public T Model { get; set; }
-       
+        public List<ErrorModel> Errors { get; set; } = new List<ErrorModel>();
+
     }
 }

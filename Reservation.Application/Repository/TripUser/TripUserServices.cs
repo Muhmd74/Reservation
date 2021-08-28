@@ -54,7 +54,21 @@ namespace Reservation.Application.Repository.TripUser
                 {
                     Message = e.Message,
                     Success = false,
-                    Model = null
+                    Model = null,
+                    Errors = new List<ErrorModel> {
+                        new ErrorModel {
+                            Message = e.Message,
+                            Property = "Exception"
+                        },
+                        new ErrorModel {
+                            Message = e.InnerException?.Message,
+                            Property = "Inner Exception"
+                        },
+                        new ErrorModel {
+                            Message = e.Source,
+                            Property = "Source"
+                        }
+                    }
                 };
             }
         }

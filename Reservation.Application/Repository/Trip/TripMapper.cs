@@ -13,9 +13,7 @@ namespace Reservation.Application.Repository.Trip
         {
             //create
             CreateMap<Core.Entities.Trip, CreateTripCommand>()
-                .ForMember(d => d.DateTime,
-                    s => s.MapFrom(a => a.DateTime == DateTime.Now))
-                 .ForMember(d => d.Content,
+                        .ForMember(d => d.Content,
                     s =>
                         s.MapFrom(a => HttpUtility.HtmlEncode(a.Content))
                 ).ReverseMap();

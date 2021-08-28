@@ -1,22 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
-using Reservation.WebApi.Setups.Factory.Configurations;
+ using Reservation.WebApi.Setups.Factory.Configurations;
 using Reservation.WebApi.Setups.Factory.Services;
-using Reservation.WebApi.Setups.Services;
+using Reservation.WebApi.ValidFilter;
 
 namespace Reservation.WebApi
 {
@@ -29,8 +22,18 @@ namespace Reservation.WebApi
 
         public IConfiguration Configuration { get; }
 
-         public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;
+                options.Filters.Add<ValidatorActionFilter>();
+            }).AddFluentValidation(options =>
+            options.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+
+
             services.InstallServicesInAssembly(Configuration);
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
                 Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
@@ -38,7 +41,7 @@ namespace Reservation.WebApi
             services.AddControllers();
         }
 
-         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

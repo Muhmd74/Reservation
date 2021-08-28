@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using MediatR;
 using Reservation.Application.Common.Response;
@@ -8,11 +9,16 @@ using Reservation.Core.Enums;
 
 namespace Reservation.Application.Commands.UserCommand
 {
-    public class CreateUserCommand :IRequest<OutputResponse<GetAllUserResponse>>
+    public class CreateUserCommand : IRequest<OutputResponse<GetAllUserResponse>>
     {
-         public string Name { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
         public UserType UserType { get; set; }
+        [EmailAddress]
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Password { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
