@@ -183,7 +183,8 @@ namespace Reservation.Application.Repository.Trip
             {
                 source.ImageUrl = _fileService.Upload(target.Image, DirectoryNames.Trip);
             }
-            source.CityName = target.CityName;
+            source.CityId = target.CityId;
+            source.CategoryId = target.CategoryId;
             source.Content = HttpUtility.HtmlEncode(target.Content);
             source.Title = target.Title;
             source.DateTime = DateTime.Now;

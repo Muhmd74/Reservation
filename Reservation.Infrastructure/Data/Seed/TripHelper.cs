@@ -19,7 +19,8 @@ namespace Reservation.Infrastructure.Data.Seed
                 builder.HasData(
                     new Trip()
                     {
-                        CityName = trip.CityName,
+                        CityId = trip.CityId,
+                        CategoryId = trip.CategoryId,
                         Content = trip.Content,
                         DateTime = DateTime.Now,
                         Price = trip.Price,

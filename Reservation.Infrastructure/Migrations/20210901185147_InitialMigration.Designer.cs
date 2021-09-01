@@ -10,7 +10,7 @@ using Reservation.Infrastructure.Data.ApplicationDbContext;
 namespace Reservation.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210828132145_InitialMigration")]
+    [Migration("20210901185147_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,126 @@ namespace Reservation.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Reservation.Core.Entities.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("3cd161b7-3e7a-6914-a8fa-3eba2a8a3f91"),
+                            Description = "Book your holiday at one of famous Red Sea resorts like Hurghada, el-Gouna, Makadi bay or even Marsa Alam and combine beach leisure trip with five days Nile ",
+                            IsDeleted = false,
+                            Name = "Cruise"
+                        });
+                });
+
+            modelBuilder.Entity("Reservation.Core.Entities.City", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<Guid>("CountryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("City");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("7d0f809a-3fb4-4c19-8923-0025ab0e6517"),
+                            CountryId = new Guid("13572456-6511-47af-9774-d1055004ce52"),
+                            Description = "the beach just in one trip to Egypt.",
+                            IsDeleted = false,
+                            Name = "Hurghada"
+                        });
+                });
+
+            modelBuilder.Entity("Reservation.Core.Entities.Country", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Iso")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Iso")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Country");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("13572456-6511-47af-9774-d1055004ce52"),
+                            Description = "o Egypt to view its ancient monuments, natural attractions beckon travelers too. The Red Sea coast is known for its coral reefs and beach resorts.",
+                            IsDeleted = false,
+                            Iso = "EG",
+                            Name = "Egypt"
+                        });
+                });
+
             modelBuilder.Entity("Reservation.Core.Entities.Trip", b =>
                 {
                     b.Property<Guid>("Id")
@@ -28,9 +148,11 @@ namespace Reservation.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<string>("CityName")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CityId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
@@ -38,7 +160,7 @@ namespace Reservation.Infrastructure.Migrations
                     b.Property<DateTime>("DateTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 8, 28, 15, 21, 44, 775, DateTimeKind.Local).AddTicks(9291));
+                        .HasDefaultValue(new DateTime(2021, 9, 1, 20, 51, 42, 878, DateTimeKind.Local).AddTicks(7783));
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -55,15 +177,20 @@ namespace Reservation.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CityId");
+
                     b.ToTable("Trips");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("4cd181b7-3e7a-4691-a8fa-3eba2a8a3f72"),
-                            CityName = "Cairo",
+                            CategoryId = new Guid("3cd161b7-3e7a-6914-a8fa-3eba2a8a3f91"),
+                            CityId = new Guid("7d0f809a-3fb4-4c19-8923-0025ab0e6517"),
                             Content = "Start and end in Cairo! With the In-depth Cultural tour King Ramses with Cruise - 13 days, you have a 13 days tour package taking you through Cairo, Egypt and 8 other destinations in Egypt. King Ramses with Cruise - 13 days includes accommodation in a hotel as well as an expert guide, meals, transport and more",
-                            DateTime = new DateTime(2021, 8, 28, 15, 21, 44, 748, DateTimeKind.Local).AddTicks(2964),
+                            DateTime = new DateTime(2021, 9, 1, 20, 51, 42, 516, DateTimeKind.Local).AddTicks(5674),
                             ImageUrl = "",
                             IsDeleted = false,
                             Price = 456m,
@@ -95,13 +222,13 @@ namespace Reservation.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("50638cf6-4c57-46f2-8541-7cff0bb27ff3"),
+                            Id = new Guid("70a1f098-601d-4026-a7f2-dd1f7368be20"),
                             TripId = new Guid("4cd181b7-3e7a-4691-a8fa-3eba2a8a3f72"),
                             UserId = new Guid("e245d563-07b6-46c7-8a36-346e11144376")
                         },
                         new
                         {
-                            Id = new Guid("55c9b232-a5f1-4a3d-910d-b50fbd2a0944"),
+                            Id = new Guid("8af15f53-6531-49fc-8893-775d14d8dbd7"),
                             TripId = new Guid("4cd181b7-3e7a-4691-a8fa-3eba2a8a3f72"),
                             UserId = new Guid("7d0f809a-7e7d-4d62-8923-85011cdc7046")
                         });
@@ -209,6 +336,36 @@ namespace Reservation.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Reservation.Core.Entities.City", b =>
+                {
+                    b.HasOne("Reservation.Core.Entities.Country", "Country")
+                        .WithMany("Cities")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("Reservation.Core.Entities.Trip", b =>
+                {
+                    b.HasOne("Reservation.Core.Entities.Category", "Category")
+                        .WithMany("Trips")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Reservation.Core.Entities.City", "City")
+                        .WithMany("Trips")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("City");
+                });
+
             modelBuilder.Entity("Reservation.Core.Entities.TripUser", b =>
                 {
                     b.HasOne("Reservation.Core.Entities.Trip", "Trip")
@@ -226,6 +383,21 @@ namespace Reservation.Infrastructure.Migrations
                     b.Navigation("Trip");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Reservation.Core.Entities.Category", b =>
+                {
+                    b.Navigation("Trips");
+                });
+
+            modelBuilder.Entity("Reservation.Core.Entities.City", b =>
+                {
+                    b.Navigation("Trips");
+                });
+
+            modelBuilder.Entity("Reservation.Core.Entities.Country", b =>
+                {
+                    b.Navigation("Cities");
                 });
 
             modelBuilder.Entity("Reservation.Core.Entities.Trip", b =>

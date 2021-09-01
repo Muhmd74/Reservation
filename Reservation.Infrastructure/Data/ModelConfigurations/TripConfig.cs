@@ -14,9 +14,7 @@ namespace Reservation.Infrastructure.Data.ModelConfigurations
             //Id
             builder.Property(d  => d .Id)
                 .HasDefaultValueSql("NEWID()");
-            //CityName
-            builder.Property(d => d.CityName)
-                .HasMaxLength(250);
+      
             //Title
             builder.Property(d => d.Title)
                 .HasMaxLength(200);

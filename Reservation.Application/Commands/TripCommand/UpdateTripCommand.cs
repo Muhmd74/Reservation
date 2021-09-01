@@ -18,7 +18,9 @@ namespace Reservation.Application.Commands.TripCommand
         public decimal Price { get; set; }
         public IFormFile Image { get; set; }
         public string ImageUrl { get; set; }
-        public string CityName { get; set; }
-         public Guid Id { get; set; }
+        public Guid CategoryId { get; set; }
+        public Guid CityId { get; set; }
+
+        public Guid Id { get; set; }
     }
 }

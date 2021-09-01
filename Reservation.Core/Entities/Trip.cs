@@ -10,9 +10,13 @@ namespace Reservation.Core.Entities
         public string Content { get; set; }
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
-        public string CityName { get; set; }
-        public DateTime DateTime { get; set; }
+         public DateTime DateTime { get; set; }
         public bool IsDeleted { get; set; }
+        public Guid CategoryId { get; set; }
+        public Category Category { get; set; }
+        public City City { get; set; }
+        public Guid CityId { get; set; }
+
         public ICollection<TripUser> TripUsers { get; set; }
  
     }

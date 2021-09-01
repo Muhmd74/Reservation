@@ -20,6 +20,10 @@ namespace Reservation.Application.Commands.TripCommand
         public IFormFile Image { get; set; }
         public string ImageUrl { get; set; }
         [Required]
-        public string CityName { get; set; }
+        public Guid CategoryId { get; set; }
+
+        [Required]
+        public Guid CityId { get; set; }
+
     }
 }
