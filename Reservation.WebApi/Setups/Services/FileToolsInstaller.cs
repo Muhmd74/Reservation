@@ -2,10 +2,11 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Reservation.WebApi.Setups.Factory.Services;
 
 namespace Reservation.WebApi.Setups.Services
 {
-    public class FileToolsInstaller
+    public class FileToolsInstaller : IServiceSetup
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {

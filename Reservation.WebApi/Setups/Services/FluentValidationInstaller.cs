@@ -1,44 +1,30 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using FluentValidation;
-//using FluentValidation.AspNetCore;
-//using Microsoft.Extensions.Configuration;
-//using Microsoft.Extensions.DependencyInjection;
-//using Reservation.WebApi.Setups.Factory.Services;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Reservation.WebApi.Setups.Factory.Services;
+using Reservation.WebApi.ValidFilter;
 
-//namespace Reservation.WebApi.Setups.Services
-//{
-//    public class FluentValidationInstaller : IServiceSetup
-//    {
-//        public void InstallServices(IServiceCollection services, IConfiguration configuration)
-//        {
-//            services.AddMvc(options => options.Filters.Add<ValidatorActionFilter>())
-//                .AddFluentValidation(options =>
-//                    options.RegisterValidatorsFromAssemblyContaining<AddNewDefinitionRequestValidator>());
-//        }
+namespace Reservation.WebApi.Setups.Services
+{
+    public class FluentValidationInstaller : IServiceSetup
+    {
+        public void InstallServices(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddMvc(options =>
+                {
+                    options.EnableEndpointRouting = false;
+                    options.Filters.Add<ValidatorActionFilter>();
+                }).AddFluentValidation(options =>
+                    options.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+        }
 
-//        public class
-//            AddNewDefinitionRequestValidator : AbstractValidator<
-//                AddNewDefinitionRequestValidator.AddNewDefinitionRequest>
-//        {
-//            public AddNewDefinitionRequestValidator()
-//            {
-//                RuleFor(d => d.Definition)
-//                    .NotNull()
-//                    .NotEmpty();
-//                RuleFor(d => d.Description)
-//                    .NotEmpty()
-//                    .NotNull();
-
-//            }
-
-//            public class AddNewDefinitionRequest
-//            {
-//                public string Definition { get; set; }
-//                public string Description { get; set; }
-//            }
-//        }
-//    }
-//}
+     
+    }
+}
