@@ -24,6 +24,44 @@ namespace Reservation.WebApi.Routers
 
 
         }
+
+        public static class Country
+        {
+            private const string Prefix = Root + "country/";
+            public const string GetAllCountry = Prefix + "get-all";
+            public const string GetAllCountryDeleted = Prefix + "get-all-deleted";
+
+            public const string GetCountryById = Prefix + "get-by-id";
+            public const string CreateNewCountry = Prefix + "create";
+            public const string UpdateCountry = Prefix + "update";
+            public const string DeleteOrRestoreCountry = Prefix + "delete-or-restore";
+
+
+        }
+        public static class City
+        {
+            private const string Prefix = Root + "city/";
+            public const string GetAllCity = Prefix + "get-all";
+            public const string GetAllCityDeleted = Prefix + "get-all-deleted";
+            public const string GetAllCountry = Prefix + "get-all-country";
+
+            public const string GetCityById = Prefix + "get-by-id";
+            public const string CreateNewCity = Prefix + "create";
+            public const string UpdateCity = Prefix + "update";
+            public const string DeleteOrRestoreCity = Prefix + "delete-or-restore";
+
+
+        }
+        public static class Category
+        {
+            private const string Prefix = Root + "category/";
+            public const string GetAllCategory = Prefix + "get-all";
+ 
+             public const string CreateNewCategory = Prefix + "create";
+ 
+
+
+        }
         public static class TripUserReservation
         {
             private const string Prefix = Root + "trip-user/";

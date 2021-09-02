@@ -21,6 +21,9 @@ namespace Reservation.Infrastructure.Data.ApplicationDbContext
         //Trips
         public DbSet<Trip> Trips { get; set; }
         public DbSet<TripUser> TripUsers { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Category> Categories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
