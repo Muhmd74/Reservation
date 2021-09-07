@@ -57,14 +57,14 @@ namespace Reservation.Application.Repository.User
             };
         }
 
-        public async Task<OutputResponse<GetAllUserResponse>> CreateUser(CreateUserCommand model)
+        public async Task<OutputResponseForValidationFilter> CreateUser(CreateUserCommand model)
         {
             try
             {
                 var user = _mapperManager.Map<Core.Entities.User>(model);
                 var result = await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
-                return new OutputResponse<GetAllUserResponse>()
+                return new OutputResponseForValidationFilter
                 {
                     Model = _mapperManager.Map<GetAllUserResponse>(result.Entity),
                     Message = ResponseMessages.Success,
@@ -73,7 +73,7 @@ namespace Reservation.Application.Repository.User
             }
             catch (Exception e)
             {
-               return new OutputResponse<GetAllUserResponse>()
+               return new OutputResponseForValidationFilter
                {
                      Model = null,
                      Message = e.Message,

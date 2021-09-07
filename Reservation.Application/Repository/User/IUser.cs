@@ -12,7 +12,7 @@ namespace Reservation.Application.Repository.User
     {
         Task<OutputResponse<List<GetAllUserResponse>>> GetAllUser(int pageSize = Int32.MaxValue);
         Task<OutputResponse<bool>> ChangeActivity(Guid userId);
-        Task<OutputResponse<GetAllUserResponse>> CreateUser(CreateUserCommand model);
+        Task<OutputResponseForValidationFilter> CreateUser(CreateUserCommand model);
 
     }
 }

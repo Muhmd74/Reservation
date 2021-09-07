@@ -10,7 +10,7 @@ using Reservation.Core.Enums;
 
 namespace Reservation.Application.Commands.UserCommand
 {
-    public class CreateUserCommand : IRequest<OutputResponse<GetAllUserResponse>>
+    public class CreateUserCommand : IRequest<OutputResponseForValidationFilter>
     {
         [Required]
         public string Name { get; set; }
@@ -20,8 +20,7 @@ namespace Reservation.Application.Commands.UserCommand
         [Required]
         public string Email { get; set; }
         [Required]
-        [PasswordPropertyText]
-        public string Password { get; set; }
+         public string Password { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
     }

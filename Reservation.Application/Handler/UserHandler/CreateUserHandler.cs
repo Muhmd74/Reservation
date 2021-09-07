@@ -11,7 +11,7 @@ using Reservation.Application.Repository.User.Dtos.Responses;
 
 namespace Reservation.Application.Handler.UserHandler
 {
-    public class CreateUserHandler : IRequestHandler<CreateUserCommand,OutputResponse<GetAllUserResponse>>
+    public class CreateUserHandler : IRequestHandler<CreateUserCommand, OutputResponseForValidationFilter>
     {
         private readonly IUser _user;
 
@@ -20,7 +20,7 @@ namespace Reservation.Application.Handler.UserHandler
             _user = user;
         }
 
-        public async Task<OutputResponse<GetAllUserResponse>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<OutputResponseForValidationFilter> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var result =await _user.CreateUser(request);
             return result;
