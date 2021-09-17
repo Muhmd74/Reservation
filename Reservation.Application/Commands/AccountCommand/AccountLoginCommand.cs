@@ -7,7 +7,7 @@ using Reservation.Application.Common.Response;
 
 namespace Reservation.Application.Commands.AccountCommand
 {
-    public class AccountLoginCommand : IRequest<OutputResponse<bool>>
+    public class AccountLoginCommand : IRequest<AuthResponse>
     {
         [Required]
         [Display(Name = "Email")]

@@ -29,7 +29,7 @@ namespace Reservation.Infrastructure.Data.ApplicationDbContext
         {
             string ADMIN_ID = "13572456-6511-47af-9774-d1055004ce52";
             string ROLE_ID = "e1d3e5a7-3d6f-4831-8077-8eb576274648";
-
+             string ROLE_USER_ID = "e23445a7-5d6f-4831-8027-8eb576274648";
             //seed admin role
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {
@@ -38,7 +38,13 @@ namespace Reservation.Infrastructure.Data.ApplicationDbContext
                 Id = ROLE_ID,
                 ConcurrencyStamp = ROLE_ID
             });
-
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Name = "User",
+                NormalizedName = "USER",
+                Id = ROLE_USER_ID,
+                ConcurrencyStamp = ROLE_USER_ID
+            });
             //create user
             var appUser = new ApplicationUser()
             {

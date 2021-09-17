@@ -52,6 +52,13 @@ namespace Reservation.Infrastructure.Migrations
                             ConcurrencyStamp = "e1d3e5a7-3d6f-4831-8077-8eb576274648",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "e23445a7-5d6f-4831-8027-8eb576274648",
+                            ConcurrencyStamp = "e23445a7-5d6f-4831-8027-8eb576274648",
+                            Name = "User",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -244,7 +251,7 @@ namespace Reservation.Infrastructure.Migrations
                         {
                             Id = "13572456-6511-47af-9774-d1055004ce52",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0b7ac672-a411-4a1f-b96e-71cad4da09ca",
+                            ConcurrencyStamp = "4534ba67-842e-4c5e-b510-70aec64448c4",
                             Email = "admin",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -252,9 +259,9 @@ namespace Reservation.Infrastructure.Migrations
                             LastName = "Admin",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMsnN1JUOmiTFCdg8LkBCs7xP7aft7mY/OwlxYvyGgX1R8/zTO7tCfFyVbrgCPYOYw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAojpQp8HL5J78uVmxtoA+f2Ed34yx0qlVbd6AtMFNKiSXA4LPj+hlZWm0RKng4o3w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c5831226-b29e-42d1-90e0-ec8d002603d0",
+                            SecurityStamp = "56e78bfa-b644-493d-9950-de140dca5ef2",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -370,7 +377,7 @@ namespace Reservation.Infrastructure.Migrations
                     b.Property<DateTime>("DateTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 9, 17, 2, 6, 36, 518, DateTimeKind.Local).AddTicks(7278));
+                        .HasDefaultValue(new DateTime(2021, 9, 17, 21, 46, 22, 23, DateTimeKind.Local).AddTicks(5862));
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");

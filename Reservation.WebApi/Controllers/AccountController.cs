@@ -1,14 +1,14 @@
-﻿ using Microsoft.AspNetCore.Mvc;
- using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Reservation.Application.Commands.AccountCommand;
- using Reservation.Application.Common.Authentication;
- using Reservation.Core.Entities;
+using Reservation.Application.Common.Authentication;
+using Reservation.Core.Entities;
 
 namespace Reservation.WebApi.Controllers
 {
- 
+
     public class AccountController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -34,20 +34,33 @@ namespace Reservation.WebApi.Controllers
             return BadRequest(ModelState);
         }
 
+
         [HttpPost(Routers.Router.Account.Login)]
         public async Task<IActionResult> Login([FromBody] AccountLoginCommand model)
         {
 
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
-            }
+                var result = await _mediator.Send(model);
+                if (result.IsAuthenticated)
+                {
+                    return Ok(new
+                    {
+                        Token=result.Token,
+                        Emial=result.Email,
+                        ExpiresOn=result.ExpiresOn
+                    });
+                }
 
-            return BadRequest(result);
+                return BadRequest(new
+                {
+                    result.Message
+                });
+            }
+            return BadRequest(ModelState);
 
         }
 
-       
+
     }
 }

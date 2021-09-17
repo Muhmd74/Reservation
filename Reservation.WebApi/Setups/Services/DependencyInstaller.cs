@@ -7,6 +7,7 @@ using Reservation.Application.Repository.City;
 using Reservation.Application.Repository.Country;
 using Reservation.Application.Repository.Trip;
 using Reservation.Application.Repository.TripUser;
+using Reservation.Core.Interface;
 using Reservation.WebApi.Setups.Factory.Services;
 
 namespace Reservation.WebApi.Setups.Services

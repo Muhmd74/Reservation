@@ -79,6 +79,7 @@ namespace Reservation.WebApi.Routers
         {
             private const string Prefix = Root + "account/";
             public const string Register = Prefix + "register";
+            public const string GetToken = Prefix + "get-token";
 
             public const string Login = Prefix + "login";
 

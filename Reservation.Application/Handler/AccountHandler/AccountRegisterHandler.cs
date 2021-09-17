@@ -13,6 +13,7 @@ using Reservation.Application.Commands.AccountCommand;
 using Reservation.Application.Common.Authentication;
 using Reservation.Application.Common.Response;
 using Reservation.Core.Entities;
+using Reservation.Core.Interface;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace Reservation.Application.Handler.AccountHandler
@@ -25,9 +26,9 @@ namespace Reservation.Application.Handler.AccountHandler
 
         private readonly IJwtAuthManager _authManager;
 
-        public AccountRegisterHandler(  UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IJwtAuthManager authManager)
+        public AccountRegisterHandler(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IJwtAuthManager authManager)
         {
-             _userManager = userManager;
+            _userManager = userManager;
             _signInManager = signInManager;
             _authManager = authManager;
         }
@@ -46,7 +47,8 @@ namespace Reservation.Application.Handler.AccountHandler
                     LastName = request.LastName
                 };
                 var result = await _userManager.CreateAsync(user, request.Password);
-                 var jwtSecurityToken =await _authManager.CreateJwtToken(user);
+                var jwtSecurityToken = await _authManager.CreateJwtToken(user);
+                await _userManager.AddToRoleAsync(user, "User");
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
@@ -57,7 +59,7 @@ namespace Reservation.Application.Handler.AccountHandler
                             Message = ResponseMessages.Success,
                             IsAuthenticated = true,
                             UserName = user.Email,
-                            Roles = new List<string>() {"User"},
+                            Roles = new List<string>() { "User" },
                             Email = user.Email,
                             ExpiresOn = jwtSecurityToken.ValidTo,
                             Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken)

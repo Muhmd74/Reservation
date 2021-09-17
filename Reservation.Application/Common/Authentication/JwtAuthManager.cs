@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Reservation.Application.Commands.AccountCommand;
+using Reservation.Application.Common.Response;
 using Reservation.Core.Entities;
 using Reservation.Core.Interface;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
@@ -58,5 +60,6 @@ namespace Reservation.Application.Common.Authentication
 
             return jwtSecurityToken;
         }
+
     }
 }

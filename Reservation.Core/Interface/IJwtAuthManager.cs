@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Reservation.Core.Entities;
 
-namespace Reservation.Application.Common.Authentication
+namespace Reservation.Core.Interface
 {
     public interface IJwtAuthManager
     {
