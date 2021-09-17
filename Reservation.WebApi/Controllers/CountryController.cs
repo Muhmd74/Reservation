@@ -27,26 +27,36 @@ namespace Reservation.WebApi.Controllers
         public async Task<IActionResult> CreateNewCountry([FromBody] CreateCountryCommand model)
         {
 
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
-            }
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
 
-            return BadRequest(result);
+                return BadRequest(result);
+            }
+            return BadRequest(ModelState);
+
         }
         [HttpPut(Routers.Router.Country.UpdateCountry)]
 
         public async Task<IActionResult> UpdateCountry([FromBody] UpdateCountryCommand model)
         {
 
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
-            }
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
 
-            return BadRequest(result);
+                return BadRequest(result);
+            }
+            return BadRequest(ModelState);
+
         }
 
         [HttpGet(Routers.Router.Country.GetAllCountry)]

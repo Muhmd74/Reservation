@@ -26,31 +26,41 @@ namespace Reservation.WebApi.Controllers
         public async Task<IActionResult> CreateNewCity([FromBody] CreateCityCommand model)
         {
 
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
-            }
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
 
-            return BadRequest(result);
+                return BadRequest(result);
+            }
+            return BadRequest(ModelState);
+
         }
         [HttpPut(Routers.Router.City.UpdateCity)]
 
         public async Task<IActionResult> UpdateCountry([FromBody] UpdateCityCommand model)
         {
 
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
-            }
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
 
-            return BadRequest(result);
+                return BadRequest(result);
+            }
+            return BadRequest(ModelState);
+
         }
 
         [HttpGet(Routers.Router.City.GetAllCity)]
 
-        public async Task<IActionResult> GetAllCountry([FromQuery] int pageSize = Int32.MaxValue, int pageNumber = Int32.MaxValue)
+        public async Task<IActionResult> GetAllCountry([FromQuery] int pageSize, int pageNumber )
         {
             var query = new GetAllCityQuery(pageSize, pageNumber);
             var result = await _mediator.Send(query);
@@ -64,7 +74,7 @@ namespace Reservation.WebApi.Controllers
 
         [HttpGet(Routers.Router.City.GetAllCityDeleted)]
 
-        public async Task<IActionResult> GetAllCountryDeleted([FromQuery] int pageSize = Int32.MaxValue, int pageNumber = Int32.MaxValue)
+        public async Task<IActionResult> GetAllCountryDeleted([FromQuery] int pageSize , int pageNumber )
         {
             var query = new GetAllCityDeletedQuery(pageSize, pageNumber);
             var result = await _mediator.Send(query);

@@ -22,26 +22,36 @@ namespace Reservation.WebApi.Controllers
         public async Task<IActionResult> CreateNewTrip([FromForm] CreateTripCommand model)
         {
 
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
-            }
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
 
-            return BadRequest(result);
+                return BadRequest(result);
+            }
+            return BadRequest(ModelState);
+
         }
         [HttpPut(Routers.Router.Trip.UpdateTrip)]
 
         public async Task<IActionResult> UpdateReservation([FromForm] UpdateTripCommand model)
         {
 
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
-            }
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
 
-            return BadRequest(result);
+                return BadRequest(result);
+            }
+            return BadRequest(ModelState);
+
         }
 
         [HttpGet(Routers.Router.Trip.GetAllTrip)]

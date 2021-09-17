@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Reservation.Application.Commands.AccountCommand;
 using Reservation.Application.Common.Authentication;
@@ -8,8 +9,7 @@ using Reservation.Core.Entities;
 
 namespace Reservation.WebApi.Controllers
 {
-
-    public class AccountController : ControllerBase
+     public class AccountController : ControllerBase
     {
         private readonly IMediator _mediator;
         public AccountController(IMediator mediator)
@@ -46,9 +46,9 @@ namespace Reservation.WebApi.Controllers
                 {
                     return Ok(new
                     {
-                        Token=result.Token,
-                        Emial=result.Email,
-                        ExpiresOn=result.ExpiresOn
+                        Token = result.Token,
+                        Emial = result.Email,
+                        ExpiresOn = result.ExpiresOn
                     });
                 }
 

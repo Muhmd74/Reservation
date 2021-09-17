@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Reservation.Application.Commands.AdministrationCommand;
 using Reservation.Application.Query.AdministrationQuery;
 
 namespace Reservation.WebApi.Controllers
 {
+    //[Authorize(Roles = "Admin")]
 
     public class AdministrationController : ControllerBase
     {
@@ -23,12 +25,18 @@ namespace Reservation.WebApi.Controllers
         [HttpPost(Routers.Router.Administration.CreateRole)]
         public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand model)
         {
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+                return BadRequest(result);
+
             }
-            return BadRequest(result);
+
+            return BadRequest(ModelState);
         }
 
         [HttpGet(Routers.Router.Administration.ListRoles)]
@@ -46,22 +54,34 @@ namespace Reservation.WebApi.Controllers
         [HttpPut(Routers.Router.Administration.EditRole)]
         public async Task<IActionResult> EditRole([FromBody] EditRoleCommand model)
         {
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+                return BadRequest(result);
+
             }
-            return BadRequest(result);
+            return BadRequest(ModelState);
+
         }
         [HttpPut(Routers.Router.Administration.EditUser)]
         public async Task<IActionResult> EditUser([FromBody] EditRoleCommand model)
         {
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+                return BadRequest(result);
+
             }
-            return BadRequest(result);
+            return BadRequest(ModelState);
+
         }
 
         [HttpGet(Routers.Router.Administration.ListUsers)]
@@ -79,12 +99,17 @@ namespace Reservation.WebApi.Controllers
         [HttpPost(Routers.Router.Administration.DeleteUser)]
         public async Task<IActionResult> DeleteUser([FromQuery] DeleteUserCommand model)
         {
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+                return BadRequest(result);
             }
-            return BadRequest(result);
+            return BadRequest(ModelState);
+
         }
 
         [HttpPost(Routers.Router.Administration.DeleteRole)]
@@ -101,12 +126,18 @@ namespace Reservation.WebApi.Controllers
         [HttpPost(Routers.Router.Administration.ManageUserRoles)]
         public async Task<IActionResult> ManageUserRoles([FromBody] ManageUserRolesCommand model)
         {
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+                return BadRequest(result);
+
             }
-            return BadRequest(result);
+            return BadRequest(ModelState);
+
         }
         //[HttpPut(Routers.Router.Administration.EditUsersInRole)]
         //public async Task<IActionResult> EditUsersInRole([FromBody] List<EditUsersInRoleCommand> id)

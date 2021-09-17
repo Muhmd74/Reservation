@@ -11,6 +11,7 @@ using Reservation.Application.Query.CityQuery;
 
 namespace Reservation.WebApi.Controllers
 {
+
     public class CategoryController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -25,13 +26,18 @@ namespace Reservation.WebApi.Controllers
         public async Task<IActionResult> CreateNewCategory([FromBody] CreateCategoryCommand model)
         {
 
-            var result = await _mediator.Send(model);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                return Ok(result);
+                var result = await _mediator.Send(model);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+
+                return BadRequest(result);
             }
 
-            return BadRequest(result);
+            return BadRequest(ModelState);
         }
 
         [HttpGet(Routers.Router.Category.GetAllCategory)]

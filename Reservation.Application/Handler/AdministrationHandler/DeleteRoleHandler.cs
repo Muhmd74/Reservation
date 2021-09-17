@@ -22,7 +22,7 @@ namespace Reservation.Application.Handler.AdministrationHandler
         public async Task<OutputResponse<bool>> Handle(DeleteRoleCommand request, CancellationToken cancellationToken)
         {
             var role = await _roleManager.FindByIdAsync(request.Id);
-            if (role != null)
+            if (role != null && role.Name!="Admin")
             {
                 var result = await _roleManager.DeleteAsync(role);
                 return new OutputResponse<bool>()
@@ -35,7 +35,7 @@ namespace Reservation.Application.Handler.AdministrationHandler
             return new OutputResponse<bool>()
             {
                 Model = false,
-                Message = ResponseMessages.Success,
+                Message = ResponseMessages.Failure,
                 Success = false
             };
         }
