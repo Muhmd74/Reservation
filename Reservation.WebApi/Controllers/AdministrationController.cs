@@ -10,7 +10,7 @@ using Reservation.Application.Query.AdministrationQuery;
 
 namespace Reservation.WebApi.Controllers
 {
- 
+
     public class AdministrationController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,7 +21,7 @@ namespace Reservation.WebApi.Controllers
         }
 
         [HttpPost(Routers.Router.Administration.CreateRole)]
-        public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand model )
+        public async Task<IActionResult> CreateRole([FromBody] CreateRoleCommand model)
         {
             var result = await _mediator.Send(model);
             if (result.Success)
@@ -36,7 +36,7 @@ namespace Reservation.WebApi.Controllers
         {
             var query = new ListRolesQuery();
 
-             var result = await _mediator.Send(query);
+            var result = await _mediator.Send(query);
             if (result.Success)
             {
                 return Ok(result);
@@ -44,9 +44,64 @@ namespace Reservation.WebApi.Controllers
             return BadRequest(result);
         }
         [HttpPut(Routers.Router.Administration.EditRole)]
-        public async Task<IActionResult> EditRole([FromQuery] EditRoleCommand id)
+        public async Task<IActionResult> EditRole([FromBody] EditRoleCommand model)
         {
-            var result = await _mediator.Send(id);
+            var result = await _mediator.Send(model);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPut(Routers.Router.Administration.EditUser)]
+        public async Task<IActionResult> EditUser([FromBody] EditRoleCommand model)
+        {
+            var result = await _mediator.Send(model);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet(Routers.Router.Administration.ListUsers)]
+        public async Task<IActionResult> ListUsers([FromQuery] int pageSize)
+        {
+            var query = new ListUsersQuery(pageSize);
+
+            var result = await _mediator.Send(query);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost(Routers.Router.Administration.DeleteUser)]
+        public async Task<IActionResult> DeleteUser([FromQuery] DeleteUserCommand model)
+        {
+            var result = await _mediator.Send(model);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost(Routers.Router.Administration.DeleteRole)]
+        public async Task<IActionResult> DeleteRole([FromQuery] DeleteRoleCommand model)
+        {
+            var result = await _mediator.Send(model);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost(Routers.Router.Administration.ManageUserRoles)]
+        public async Task<IActionResult> ManageUserRoles([FromBody] ManageUserRolesCommand model)
+        {
+            var result = await _mediator.Send(model);
             if (result.Success)
             {
                 return Ok(result);

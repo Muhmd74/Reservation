@@ -40,8 +40,7 @@ namespace Reservation.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Trip.WebApi v1"));
             }
-            //app.UseAuthentication();
-            //app.UseAuthorization();
+ 
             app.InstallConfigureInAssembly(app);
         }
     }

@@ -6,7 +6,7 @@ using MediatR;
  using Reservation.Application.Common.Response;
 namespace Reservation.Application.Commands.AccountCommand
 {
-    public class AccountRegisterCommand : IRequest<OutputResponseForValidationFilter>
+    public class AccountRegisterCommand : IRequest<AuthResponse>
     {
         [Required]
         [EmailAddress]
@@ -17,14 +17,10 @@ namespace Reservation.Application.Commands.AccountCommand
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password",
+         [Compare("Password",
             ErrorMessage = "Password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
-        [Display(Name = "Last Name")]
-
-        public string LastName { get; set; }
+         public string FirstName { get; set; }
+         public string LastName { get; set; }
     }
 }

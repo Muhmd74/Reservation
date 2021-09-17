@@ -89,7 +89,13 @@ namespace Reservation.WebApi.Routers
             private const string Prefix = Root + "administration/";
             public const string CreateRole = Prefix + "create-role";
             public const string ListRoles = Prefix + "list-role";
-            public const string EditRole = Prefix + "edit";
+            public const string EditRole = Prefix + "edit-role";
+            public const string DeleteRole = Prefix + "edit-role";
+            public const string EditUser = Prefix + "edit-user";
+            public const string DeleteUser = Prefix + "delete-user";
+            public const string ListUsers = Prefix + "list-user";
+
+            public const string ManageUserRoles = Prefix + "manage-user-roles";
             //public const string EditUsersInRole = Prefix + "edit-user-in-role";
 
         }
