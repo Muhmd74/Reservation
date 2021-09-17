@@ -25,7 +25,7 @@ namespace Reservation.Application.Repository.TripUser
                 .ReverseMap();
 
             //GetName
-            CreateMap<Core.Entities.User, GetUsersName>()
+            CreateMap<Core.Entities.ApplicationUser, GetUsersName>()
                 .ForMember(d => d.UserId, s => s.MapFrom(a => a.Id))
                 .ReverseMap();
         }

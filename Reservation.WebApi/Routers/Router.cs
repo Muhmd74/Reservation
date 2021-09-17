@@ -75,15 +75,22 @@ namespace Reservation.WebApi.Routers
 
         }
 
-        public static class User
+        public static class Account
         {
-            private const string Prefix = Root + "user/";
-            public const string CreateUser = Prefix + "create";
-            public const string GetAllUser = Prefix + "get-all";
-            public const string ChangeActivity = Prefix + "change-activity";
+            private const string Prefix = Root + "account/";
+            public const string Register = Prefix + "register";
 
+            public const string Login = Prefix + "login";
 
+        }
 
+        public static class Administration
+        {
+            private const string Prefix = Root + "administration/";
+            public const string CreateRole = Prefix + "create-role";
+            public const string ListRoles = Prefix + "list-role";
+            public const string EditRole = Prefix + "edit";
+            //public const string EditUsersInRole = Prefix + "edit-user-in-role";
 
         }
     }

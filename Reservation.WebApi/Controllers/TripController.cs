@@ -1,16 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
-using Reservation.Application.Commands;
 using Reservation.Application.Commands.TripCommand;
-using Reservation.Application.Commands.UserCommand;
-using Reservation.Application.Common.Response;
-using Reservation.Application.Handler;
-using Reservation.Application.Query;
 using Reservation.Application.Query.TripQuery;
 
 namespace Reservation.WebApi.Controllers

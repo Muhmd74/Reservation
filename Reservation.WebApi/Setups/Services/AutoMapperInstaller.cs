@@ -24,8 +24,7 @@ namespace Reservation.WebApi.Setups.Services
             {
                 a.AddProfile<TripMapper>();
                 a.AddProfile<TripUserMapper>();
-                a.AddProfile<UserMapper>();
-                a.AddProfile<CountryMapper>();
+                 a.AddProfile<CountryMapper>();
                 a.AddProfile<CityMapper>();
                 a.AddProfile<CategoryMapper>();
             });

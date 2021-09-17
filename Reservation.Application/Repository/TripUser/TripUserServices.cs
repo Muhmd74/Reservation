@@ -30,7 +30,7 @@ namespace Reservation.Application.Repository.TripUser
             try
             {
                 var tripUser = _mapperManager.Map<Core.Entities.TripUser>(model);
-                if (model.UserId==tripUser.UserId&&model.TripId==tripUser.TripId)
+                if (model.UserId.ToString()==tripUser.UserId&&model.TripId==tripUser.TripId)
                 {
                     return new OutputResponse<CreateTripUserResponse>()
                     {
@@ -76,7 +76,7 @@ namespace Reservation.Application.Repository.TripUser
         public async Task<OutputResponse<List<GetUsersName>>> SearchUsers(string name)
 
         {
-            var result = await _context.Users.Where(d => d.Name.Contains(name)
+            var result = await _context.Users.Where(d => d.FirstName.Contains(name)
                                                     || name == null).ToListAsync();
             return new OutputResponse<List<GetUsersName>>()
             {
@@ -88,7 +88,7 @@ namespace Reservation.Application.Repository.TripUser
 
         public async Task<OutputResponse<bool>> Delete(Guid userId, Guid tripId)
         {
-            var result = await _context.TripUsers.FirstOrDefaultAsync(d => d.UserId == userId && d.TripId == tripId);
+            var result = await _context.TripUsers.FirstOrDefaultAsync(d => d.UserId == userId.ToString() && d.TripId == tripId);
             if (result != null)
             {
                 _context.Remove(result);

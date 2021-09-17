@@ -21,7 +21,6 @@ namespace Reservation.WebApi.Setups.Services
         {
             services.AddScoped<ITrip, TripServices>();
             services.AddScoped<ITripUser, TripUserServices>();
-            services.AddScoped<IUser, UserServices>();
             services.AddScoped<ICountry, CountryService>();
             services.AddScoped<ICity, CityService>();
             services.AddScoped<ICategory, CategoryService>();
