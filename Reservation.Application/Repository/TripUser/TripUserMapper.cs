@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
-using Reservation.Application.Commands;
+﻿using AutoMapper;
 using Reservation.Application.Commands.TripUserCommand;
 using Reservation.Application.Repository.TripUser.Dtos.Responses;
-using Reservation.Core.Helpers.TripUser;
 
 namespace Reservation.Application.Repository.TripUser
 {

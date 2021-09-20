@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -18,18 +15,22 @@ namespace Reservation.Infrastructure.Data.ApplicationDbContext
             base.OnConfiguring(optionsBuilder);
         }
 
- 
+
         //Trips
         public DbSet<Trip> Trips { get; set; }
         public DbSet<TripUser> TripUsers { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Firm> Firms { get; set; }
+        public DbSet<Offer> Offers { get; set; }
+        public DbSet<FirmReview> FirmReviews { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             string ADMIN_ID = "13572456-6511-47af-9774-d1055004ce52";
             string ROLE_ID = "e1d3e5a7-3d6f-4831-8077-8eb576274648";
-             string ROLE_USER_ID = "e23445a7-5d6f-4831-8027-8eb576274648";
+            string ROLE_USER_ID = "e23445a7-5d6f-4831-8027-8eb576274648";
             //seed admin role
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
             {

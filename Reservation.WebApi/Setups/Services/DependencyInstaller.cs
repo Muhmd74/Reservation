@@ -21,7 +21,7 @@ namespace Reservation.WebApi.Setups.Services
             services.AddScoped<ICountry, CountryService>();
             services.AddScoped<ICity, CityService>();
             services.AddScoped<ICategory, CategoryService>();
-            services.AddScoped<IJwtAuthManager, JwtAuthManager>();
+             services.AddScoped<IJwtAuthManager, JwtAuthManager>();
              //File
             services.AddScoped<FileService>();
             services.AddScoped<UploadCore>();

@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+ 
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Reservation.Application.Commands.CategoryCommand;
-using Reservation.Application.Commands.CityCommand;
-using Reservation.Application.Query.CategoryQuery;
-using Reservation.Application.Query.CityQuery;
-
+ using Reservation.Application.Query.CategoryQuery;
+ 
 namespace Reservation.WebApi.Controllers
 {
 

@@ -10,7 +10,7 @@ using Reservation.Infrastructure.Data.ApplicationDbContext;
 namespace Reservation.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210917194623_InitialCreate")]
+    [Migration("20210920023649_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -194,6 +194,9 @@ namespace Reservation.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("FirmId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -238,6 +241,8 @@ namespace Reservation.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FirmId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -253,7 +258,7 @@ namespace Reservation.Infrastructure.Migrations
                         {
                             Id = "13572456-6511-47af-9774-d1055004ce52",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4534ba67-842e-4c5e-b510-70aec64448c4",
+                            ConcurrencyStamp = "99d32720-510c-481b-986b-afc5c47e9906",
                             Email = "admin",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -261,9 +266,9 @@ namespace Reservation.Infrastructure.Migrations
                             LastName = "Admin",
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAojpQp8HL5J78uVmxtoA+f2Ed34yx0qlVbd6AtMFNKiSXA4LPj+hlZWm0RKng4o3w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPbMZEyrJmYFMEtps6zlNMH+6vAJlJJmabv6LOdqjdOcttR9UIlpR6eDuKN8v7F0xQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "56e78bfa-b644-493d-9950-de140dca5ef2",
+                            SecurityStamp = "135ece5f-3461-401a-a179-a57ea8e06e93",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -360,6 +365,143 @@ namespace Reservation.Infrastructure.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("Reservation.Core.Entities.Firm", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Landline")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("Lat")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Long")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Website")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Landline")
+                        .IsUnique();
+
+                    b.HasIndex("Mobile")
+                        .IsUnique();
+
+                    b.ToTable("Firms");
+                });
+
+            modelBuilder.Entity("Reservation.Core.Entities.FirmReview", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<Guid>("FirmId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("ReviewDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FirmId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("FirmReviews");
+                });
+
+            modelBuilder.Entity("Reservation.Core.Entities.Offer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("End")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SubTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<Guid>("TripId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TripId");
+
+                    b.ToTable("Offers");
+                });
+
             modelBuilder.Entity("Reservation.Core.Entities.Trip", b =>
                 {
                     b.Property<Guid>("Id")
@@ -379,7 +521,10 @@ namespace Reservation.Infrastructure.Migrations
                     b.Property<DateTime>("DateTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 9, 17, 21, 46, 22, 23, DateTimeKind.Local).AddTicks(5862));
+                        .HasDefaultValue(new DateTime(2021, 9, 20, 4, 36, 47, 63, DateTimeKind.Local).AddTicks(2489));
+
+                    b.Property<Guid>("FirmId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -399,6 +544,8 @@ namespace Reservation.Infrastructure.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("CityId");
+
+                    b.HasIndex("FirmId");
 
                     b.ToTable("Trips");
                 });
@@ -476,6 +623,16 @@ namespace Reservation.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Reservation.Core.Entities.ApplicationUser", b =>
+                {
+                    b.HasOne("Reservation.Core.Entities.Firm", "Firm")
+                        .WithMany("User")
+                        .HasForeignKey("FirmId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Firm");
+                });
+
             modelBuilder.Entity("Reservation.Core.Entities.City", b =>
                 {
                     b.HasOne("Reservation.Core.Entities.Country", "Country")
@@ -485,6 +642,34 @@ namespace Reservation.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("Reservation.Core.Entities.FirmReview", b =>
+                {
+                    b.HasOne("Reservation.Core.Entities.Firm", "Firm")
+                        .WithMany("FirmReviews")
+                        .HasForeignKey("FirmId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Reservation.Core.Entities.ApplicationUser", "User")
+                        .WithMany("FirmReviews")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Firm");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Reservation.Core.Entities.Offer", b =>
+                {
+                    b.HasOne("Reservation.Core.Entities.Trip", "Trip")
+                        .WithMany("Offers")
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trip");
                 });
 
             modelBuilder.Entity("Reservation.Core.Entities.Trip", b =>
@@ -501,9 +686,17 @@ namespace Reservation.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Reservation.Core.Entities.Firm", "Firm")
+                        .WithMany("Trips")
+                        .HasForeignKey("FirmId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.Navigation("Category");
 
                     b.Navigation("City");
+
+                    b.Navigation("Firm");
                 });
 
             modelBuilder.Entity("Reservation.Core.Entities.TripUser", b =>
@@ -526,6 +719,8 @@ namespace Reservation.Infrastructure.Migrations
 
             modelBuilder.Entity("Reservation.Core.Entities.ApplicationUser", b =>
                 {
+                    b.Navigation("FirmReviews");
+
                     b.Navigation("TripUsers");
                 });
 
@@ -544,8 +739,19 @@ namespace Reservation.Infrastructure.Migrations
                     b.Navigation("Cities");
                 });
 
+            modelBuilder.Entity("Reservation.Core.Entities.Firm", b =>
+                {
+                    b.Navigation("FirmReviews");
+
+                    b.Navigation("Trips");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Reservation.Core.Entities.Trip", b =>
                 {
+                    b.Navigation("Offers");
+
                     b.Navigation("TripUsers");
                 });
 #pragma warning restore 612, 618

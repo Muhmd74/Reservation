@@ -22,6 +22,7 @@ namespace Reservation.Application.Commands.TripCommand
         [Required]
         public Guid CategoryId { get; set; }
 
+        public Guid FirmId { get; set; }
         [Required]
         public Guid CityId { get; set; }
 

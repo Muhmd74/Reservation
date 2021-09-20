@@ -100,5 +100,19 @@ namespace Reservation.WebApi.Routers
             //public const string EditUsersInRole = Prefix + "edit-user-in-role";
 
         }
+
+        public static class Firm
+        {
+            private const string Prefix = Root + "firm/";
+            public const string ListFirm = Prefix + "list";
+            public const string DetailsFirm = Prefix + "details";
+
+            public const string Create = Prefix + "create";
+            public const string Update = Prefix + "update";
+            public const string ChangeActivity = Prefix + "change-activity";
+            public const string DeleteOrRestore = Prefix + "delete-or-restore";
+
+
+        }
     }
 }
